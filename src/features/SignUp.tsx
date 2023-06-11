@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { account } from "../appwrite/appwriteConfig";
+import { account, databases } from "../appwrite/appwriteConfig";
 
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
@@ -21,7 +21,30 @@ const SignUp = () => {
 
     promise.then((res) => {
       console.log(res);
-      navigate("/");
+
+      const promise = databases.createDocument(
+        "647729ede7a0545acbb7",
+        "64836eb4b4e4ec623236",
+        uuidv4(),
+        { todo: JSON.stringify([]), userID: res?.$id }
+      );
+
+      promise.then(
+        (res) => {
+          const promise = account.createEmailSession(user.email, user.password);
+
+          promise
+            .then((res) => {
+              navigate("/profile");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     }),
       (err: any) => {
         console.log(err);

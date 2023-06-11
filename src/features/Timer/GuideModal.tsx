@@ -7,15 +7,16 @@ import Modal from "@mui/material/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { setSpeakStatusAction } from "./TimerControlSlice";
 
-import "./gift.css";
 import { excerciseData } from "../../data/excersie";
 import { quotesData } from "../../data/quote";
+import { motivationalQuotesData } from "../../data/motivationalQuotes";
 const GuideModal = () => {
   const [exeValue, setExeValue]: any = useState({});
   const [quoteVal, setQuotes]: any = useState({});
   const [openModal, setOpenModal] = useState(false);
   const [openGift, setOpenGift] = useState(false);
   const [motivationText, setMotivationText]: any = useState(false);
+  const [motivationalQuoteVal, setMotivationalQuote]: any = useState({});
   const dispatch = useDispatch();
   const speakStatus = useSelector(
     (state: any) => state.TimerControl.speakStatus
@@ -30,6 +31,8 @@ const GuideModal = () => {
   useEffect(() => {
     setExeValue(getRandomdata(excerciseData));
     setQuotes(getRandomdata(quotesData));
+    setMotivationalQuote(getRandomdata(motivationalQuotesData));
+    console.log(motivationalQuoteVal);
   }, []);
 
   function getRandomdata(data: any) {
@@ -155,7 +158,7 @@ const GuideModal = () => {
               </div>
             </>
           ) : (
-            <div className="flex flex-col items-center justify-start w-full h-full gap-y-10 relative">
+            <div className="flex flex-col items-center justify-start w-full h-full gap-y-6 relative">
               <div className=" w-full flex justify-end">
                 <MdClose
                   className="cursor-pointer text-[20px]"
@@ -229,19 +232,17 @@ const GuideModal = () => {
                   </p>
                 </div>
               ) : (
-                <div className="flex flex-col items-center justify-start gap-y-16">
+                <div className="flex flex-col items-center justify-start gap-y-8">
                   <div
-                    className={`text-[40px] text-black/40 ${
+                    className={`text-[35px] flex items-center justify-center text-black/40 ${
                       motivationText
                         ? " bounce-in-top opacity-100"
                         : "opacity-0"
                     }`}
                   >
-                    "{" "}
-                    <span className=" otto font-mono text-white">
-                      You can do it
+                    <span className=" otto font-mono text-white text-center w-[90%] ">
+                      {motivationalQuoteVal?.motivationalQuote}
                     </span>{" "}
-                    "
                   </div>
 
                   <span
@@ -251,15 +252,18 @@ const GuideModal = () => {
                     {!motivationText && (
                       <span className="animate-ping absolute inline-flex w-[120px] h-[120px] rounded-full bg-sky-400 opacity-75"></span>
                     )}{" "}
-                    <span className="font-mono text-sm relative text-center flex items-center justify-center rounded-full p-5 w-[120px] h-[120px] bg-sky-500 font-bold text-white/80">
+                    <span
+                      className="click-btn-shadow font-mono text-sm relative text-center flex items-center justify-center rounded-full p-5 w-[120px] h-[120px] bg-sky-500 font-bold text-white/80 
+drop-shadow-xl "
+                    >
                       {motivationText ? "Let's go!" : " Click for Motivation"}
                     </span>
                   </span>
 
-                  <p className="w-[90%] text-center mt-8">
-                    It's time to get back to work! Tap on the but to get some
-                    motivation :)
-                  </p>
+                 {!motivationText && <p className="w-[90%] text-center mt-12 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-500 text-xl">
+                    It's time to get back to work!
+                  </p>}
+                 {!motivationText && <p>Tap on the but to get some motivation :)</p>}
                 </div>
               )}
             </div>
