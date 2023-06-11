@@ -27,6 +27,7 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
   const [showComplted, setShowCompleted]: any = useState([]);
   const [showTodo, setShowTodo]: any = useState([]);
   const [saveAction, setSaveAction]: any = useState(false);
+  const [docId, setDocId]: any = useState("");
   useEffect(() => {
     const gettodos = databases.listDocuments(
       "647729ede7a0545acbb7",
@@ -39,14 +40,11 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
         const userTodos = res.documents.filter((i) => {
           return i.userID === userDetails?.$id;
         });
+        setDocId(userTodos[0].$id);
         console.log("userTodos", userTodos);
-        console.log("id", userDetails);
 
-        const data = userTodos.map((i) => i.todo);
-        const dataLength = userTodos.length;
-
-        if (dataLength) {
-          const dataArr = JSON.parse(data[dataLength - 1]);
+        if (userTodos?.length) {
+          const dataArr = JSON.parse(userTodos[0]?.todo);
 
           setTodo(dataArr);
 
@@ -67,8 +65,6 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
               .map((item: any) => item.val)
           );
         }
-
-        // console.log(JSON.parse(data[dataLength - 1]));
       },
       (err) => {
         console.log(err);
@@ -92,10 +88,10 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
   const handleSave = () => {
     console.log(todo);
 
-    const promise = databases.createDocument(
+    const promise = databases.updateDocument(
       "647729ede7a0545acbb7",
       "64836eb4b4e4ec623236",
-      uuidv4(),
+      docId,
       { todo: JSON.stringify(todo), userID: userDetails?.$id }
     );
 
