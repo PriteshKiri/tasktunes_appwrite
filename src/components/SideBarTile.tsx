@@ -248,9 +248,12 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
             showInProgress.length !== 0 ? (
               <>
                 <ul className="list-disc	list-style-type: disc p-3">
-                  {showInProgress.map((item: string, i: number) => (
-                    <li key={i}>{item}</li>
-                  ))}
+                  {showInProgress.map((item: string, i: number) => {
+                    if (item.trim()) {
+                      return <li key={i}>{item}</li>;
+                    }
+                    return;
+                  })}
                 </ul>
               </>
             ) : (
