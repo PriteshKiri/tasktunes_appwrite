@@ -245,7 +245,7 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
           placement="left"
           TransitionComponent={Zoom}
           title={
-            showTodo.length !== 0 ? (
+            showInProgress.length !== 0 ? (
               <>
                 <ul className="list-disc	list-style-type: disc p-3">
                   {showInProgress.map((item: string, i: number) => (
