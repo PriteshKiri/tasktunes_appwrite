@@ -51,7 +51,8 @@ const Header = ({ userDetails }: { userDetails: User | null }) => {
           placement="left"
           title={
             <>
-              <div>{userDetails?.name}</div>
+              <p>{userDetails?.name}</p>
+              <p>{userDetails?.email}</p>
             </>
           }
         >

@@ -10,6 +10,18 @@ import { setSpeakStatusAction } from "./TimerControlSlice";
 import { excerciseData } from "../../data/excersie";
 import { quotesData } from "../../data/quote";
 import { motivationalQuotesData } from "../../data/motivationalQuotes";
+
+import gif1 from "../../assets/gif1.gif";
+import gif2 from "../../assets/gif2.gif";
+import gif3 from "../../assets/gif3.gif";
+import gif4 from "../../assets/gif4.gif";
+import gif5 from "../../assets/gif5.gif";
+import gif6 from "../../assets/gif6.gif";
+import gif7 from "../../assets/gif7.gif";
+import gif8 from "../../assets/gif8.gif";
+import gif9 from "../../assets/gif9.gif";
+import Instruction from "../../components/Instruction";
+
 const GuideModal = () => {
   const [exeValue, setExeValue]: any = useState({});
   const [quoteVal, setQuotes]: any = useState({});
@@ -17,6 +29,7 @@ const GuideModal = () => {
   const [openGift, setOpenGift] = useState(false);
   const [motivationText, setMotivationText]: any = useState(false);
   const [motivationalQuoteVal, setMotivationalQuote]: any = useState({});
+  const [newGif, setNewGif]: any = useState({});
   const dispatch = useDispatch();
   const speakStatus = useSelector(
     (state: any) => state.TimerControl.speakStatus
@@ -28,10 +41,13 @@ const GuideModal = () => {
     spanStyles.push({ "--i": i });
   }
 
+  const gifdata = [gif1, gif2, gif3, gif4, gif5, gif6, gif7, gif8, gif9];
+
   useEffect(() => {
     setExeValue(getRandomdata(excerciseData));
     setQuotes(getRandomdata(quotesData));
     setMotivationalQuote(getRandomdata(motivationalQuotesData));
+    setNewGif(getRandomdata(gifdata));
     console.log(motivationalQuoteVal);
   }, []);
 
@@ -66,96 +82,7 @@ const GuideModal = () => {
                   onClick={() => setOpenModal(false)}
                 />
               </div>
-              <div>
-                <span>
-                  Dear <strong>Lo-Fi</strong> Lover 👋,
-                </span>{" "}
-                <br />
-                <br />
-                <span>
-                  Welcome to <strong>CodeNChill</strong> , the one-stop tool to
-                  take your <strong>productivity</strong> to the next level 🚀
-                </span>
-                <br />
-                <br />
-                <span>
-                  Here, you can easily{" "}
-                  <strong>play, pause , and shuffle</strong> your Lo-Fi tracks,
-                  and adjust the<strong> volume</strong> or{" "}
-                  <strong>mute </strong>the audio with just one click.
-                </span>
-                <br />
-                <br />
-                <span>
-                  You can set the timer ⏱️ in <strong>three fixed ways</strong>,
-                  or even set a <strong>custom timer</strong> to fit your
-                  specific needs.Once the timer is activated, a{" "}
-                  <strong>charming animation</strong> on timer dial and a
-                  message tailored to the selected mode will be displayed at the
-                  bottom of the screen. In addition, the title of your{" "}
-                  <strong>browser tab</strong> will exhibit the timer.
-                </span>
-                <br />
-                <br />
-                <span>
-                  If the timer is set for five minutes or less, you'll be in{" "}
-                  <strong>rest </strong> mode, otherwise, you'll be in{" "}
-                  <strong>work</strong> mode.
-                </span>
-                <br />
-                <br />
-                <span>
-                  The key <strong>highlight</strong> of this tool is that it
-                  will notify you with a <strong>voice alert</strong> 📢 once
-                  the timer is over, reminding you to "rest" 🥤 or "get back to
-                  work" 💻 based on your timer mode.
-                </span>
-                <br />
-                <br />
-                <span>
-                  Our focus is on enhancing user <strong>accessibility</strong>,
-                  thus we have provided several keyboard shortcut keys for your
-                  convenience.:
-                </span>
-                <br />
-                <br />
-                <span>
-                  <li>
-                    ➜ Press <strong>'s'</strong> to shuffel the tracks
-                  </li>
-                  <li>
-                    ➜ Press <strong>'Spacebar'</strong> to play/pause
-                  </li>
-                  <li>
-                    ➜ Press <strong>'Next arrow key'</strong> for next track
-                  </li>
-                  <li>
-                    ➜ Press <strong>'Back arroy key'</strong> for previouse
-                    track
-                  </li>
-                  <li>
-                    ➜ Press <strong>'m'</strong> to mute/unmute
-                  </li>
-                </span>
-                <br />
-                <span>
-                  We have made every effort to ensure the reliability of this
-                  tool, however, if you experience music playback issues such as
-                  track freezing or failure to load, please try using the 's'
-                  key on your keyboard to shuffle the track.
-                </span>
-                <br />
-                <br />
-                <span>
-                  Thanks for reading this guide till the end. Let's{" "}
-                  <strong>code and chill</strong> now 😉
-                </span>
-                <br />
-                <br />
-                <span>Happy hustling! 💪</span>
-                <br />
-                <br />
-              </div>
+              <Instruction />
             </>
           ) : (
             <div className="flex flex-col items-center justify-start w-full h-full gap-y-6 relative">
@@ -234,36 +161,47 @@ const GuideModal = () => {
               ) : (
                 <div className="flex flex-col items-center justify-start gap-y-8">
                   <div
-                    className={`text-[35px] flex items-center justify-center text-black/40 ${
+                    className={`text-[28px] flex items-center justify-center  ${
                       motivationText
                         ? " bounce-in-top opacity-100"
                         : "opacity-0"
                     }`}
                   >
-                    <span className=" otto font-mono text-white text-center w-[90%] ">
+                    <span className=" bg-clip-text font-mono text-transparent exercise-bg italic font-bold  text-center w-[90%] ">
                       {motivationalQuoteVal?.motivationalQuote}
                     </span>{" "}
                   </div>
-
-                  <span
-                    className="relative flex cursor-pointer mt-8"
-                    onClick={() => setMotivationText(true)}
-                  >
-                    {!motivationText && (
-                      <span className="animate-ping absolute inline-flex w-[120px] h-[120px] rounded-full bg-sky-400 opacity-75"></span>
-                    )}{" "}
+                  {!motivationText && (
                     <span
-                      className="click-btn-shadow font-mono text-sm relative text-center flex items-center justify-center rounded-full p-5 w-[120px] h-[120px] bg-sky-500 font-bold text-white/80 
-drop-shadow-xl "
+                      className="relative flex cursor-pointer mt-8"
+                      onClick={() => setMotivationText(true)}
                     >
-                      {motivationText ? "Let's go!" : " Click for Motivation"}
-                    </span>
-                  </span>
+                      <span className="animate-ping absolute inline-flex w-[120px] h-[120px] rounded-full bg-sky-400 opacity-75"></span>
 
-                 {!motivationText && <p className="w-[90%] text-center mt-12 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-500 text-xl">
-                    It's time to get back to work!
-                  </p>}
-                 {!motivationText && <p>Tap on the but to get some motivation :)</p>}
+                      <span
+                        className="click-btn-shadow font-mono text-sm relative text-center flex items-center justify-center rounded-full p-5 w-[120px] h-[120px] bg-sky-500 font-bold text-white/80 
+drop-shadow-xl "
+                      >
+                        Click for Motivation
+                      </span>
+                    </span>
+                  )}{" "}
+                  {motivationText && (
+                    <img
+                      src={newGif}
+                      alt="motivational gif"
+                      width={400}
+                      className="mt-4"
+                    />
+                  )}
+                  {!motivationText && (
+                    <p className="w-[90%] text-center mt-12 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-500 text-xl">
+                      It's time to get back to work!
+                    </p>
+                  )}
+                  {!motivationText && (
+                    <p>Tap on the but to get some motivation :)</p>
+                  )}
                 </div>
               )}
             </div>
