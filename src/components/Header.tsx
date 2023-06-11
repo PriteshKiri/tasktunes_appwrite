@@ -1,0 +1,75 @@
+import { FaRegUser } from "react-icons/fa";
+import { TbLogout } from "react-icons/tb";
+import logo from "../assets/tt-logo.png";
+import { account } from "../appwrite/appwriteConfig";
+import { useNavigate, Link } from "react-router-dom";
+import { User } from "../app.models";
+import { styled } from "@mui/material/styles";
+import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
+const Header = ({ userDetails }: { userDetails: User | null }) => {
+  const navigate = useNavigate();
+  const logout = async () => {
+    try {
+      await account.deleteSession("current");
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
+    <Tooltip {...props} arrow classes={{ popper: className }} />
+  ))(({ theme }) => ({
+    [`& .${tooltipClasses.arrow}`]: {
+      color: "white",
+      opacity: "90%",
+    },
+    [`& .${tooltipClasses.tooltip}`]: {
+      backgroundColor: "#f5f5f9",
+      color: "rgba(0, 0, 0, 0.87)",
+      maxWidth: 220,
+      fontSize: theme.typography.pxToRem(12),
+      border: "1px solid #dadde9",
+    },
+  }));
+
+  return (
+    <div className="w-[100vw] flex justify-between items-start">
+      <div
+        className="w-[160px] p-2 flex justify-center items-center text-white bg-black opacity-60 rounded-md hover:opacity-80 cursor-pointer"
+        onClick={() => {
+          window.location.reload();
+        }}
+      >
+        <img src={logo} alt="" className="w-[40px]" />
+        <p className="text-white font-bold">
+          Task<span className="text-[#1a9df0]">Tunes</span>
+        </p>
+      </div>
+      <div className="flex gap-x-3">
+        <HtmlTooltip
+          placement="left"
+          title={
+            <>
+              <div>{userDetails?.name}</div>
+            </>
+          }
+        >
+          <div className=" h-[40px] w-[40px] p-1 flex justify-center items-center text-white bg-black opacity-60 hover:opacity-80 rounded-md cursor-pointer">
+            <FaRegUser className="text-[18px]" />
+          </div>
+        </HtmlTooltip>
+
+        <div
+          className="logout text-white bg-black flex gap-x-3 items-center p-2 h-[40px] opacity-60 hover:opacity-80 rounded-md cursor-pointer"
+          onClick={() => logout()}
+        >
+          <TbLogout className="text-[20px]" />
+          <p>Logout</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Header;
