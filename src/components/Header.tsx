@@ -6,8 +6,11 @@ import { useNavigate, Link } from "react-router-dom";
 import { User } from "../app.models";
 import { styled } from "@mui/material/styles";
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
+import UserProfile from "./UserProfile";
+import { useState } from "react";
 const Header = ({ userDetails }: { userDetails: User | null }) => {
   const navigate = useNavigate();
+  const [tooltipIsOpen, setTooltipIsOpen] = useState(false);
   const logout = async () => {
     try {
       await account.deleteSession("current");
@@ -48,15 +51,27 @@ const Header = ({ userDetails }: { userDetails: User | null }) => {
       </div>
       <div className="flex gap-x-3">
         <HtmlTooltip
-          placement="left"
+          disableHoverListener={true}
+          open={tooltipIsOpen}
+          onOpen={() => setTooltipIsOpen(true)}
+          onClose={() => setTooltipIsOpen(false)}
+          placement="left-end"
           title={
             <>
-              <p>{userDetails?.name}</p>
-              <p>{userDetails?.email}</p>
+              <UserProfile
+                name={userDetails?.name}
+                email={userDetails?.email}
+                userId={userDetails?.$id}
+              />
             </>
           }
         >
-          <div className=" h-[40px] w-[40px] p-1 flex justify-center items-center text-white bg-black opacity-60 hover:opacity-80 rounded-md cursor-pointer">
+          <div
+            className={` h-[40px] w-[40px] p-1 flex justify-center items-center text-white bg-black opacity-60 hover:opacity-80 rounded-md cursor-pointer ${
+              tooltipIsOpen ? "opacity-80" : ""
+            }`}
+            onClick={() => setTooltipIsOpen(!tooltipIsOpen)}
+          >
             <FaRegUser className="text-[18px]" />
           </div>
         </HtmlTooltip>

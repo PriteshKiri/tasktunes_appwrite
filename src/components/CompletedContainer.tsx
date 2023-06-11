@@ -15,7 +15,7 @@ const CompletedContainer = ({ todo, addItemToContainer }: any) => {
       ref={drop}
       className=" w-[31%] bdr-all flex flex-col justify-start items-center h-full "
     >
-      <div className="w-full flex justify-between items-center bg-[#1a1a1b] text-white p-3 bdr-b">
+      <div className="w-full flex justify-between items-center bg-[#1a1a1b] bg-green-500/30 text-white p-4 bdr-b">
         <p>Completed</p>
       </div>
       <div

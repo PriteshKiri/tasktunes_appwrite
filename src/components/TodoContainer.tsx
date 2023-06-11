@@ -23,7 +23,7 @@ const TodoContainer = ({
       ref={drop}
       className=" w-[31%] bdr-all flex flex-col justify-start items-center h-full "
     >
-      <div className="w-full flex justify-between items-center bg-[#1a1a1b] text-white p-3 bdr-b">
+      <div className="w-full flex justify-between items-center bg-[#1a1a1b] bg-red-500/30 text-white p-3 bdr-b">
         <p>Todo</p>
         <div
           className="bdr-all p-2 rounded-md cursor-pointer hover:bg-[#292929]"
