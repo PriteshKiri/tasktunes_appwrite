@@ -18,6 +18,8 @@ import CompletedContainer from "./CompletedContainer";
 import { MdPendingActions } from "react-icons/md";
 import { BiTask } from "react-icons/bi";
 import { User } from "../app.models";
+import { useDispatch } from "react-redux";
+import { setTaskDrawerStatusAction } from "../util/UtilSlice";
 
 const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
   const [state, setState]: any = useState("right");
@@ -28,6 +30,50 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
   const [showTodo, setShowTodo]: any = useState([]);
   const [saveAction, setSaveAction]: any = useState(false);
   const [docId, setDocId]: any = useState("");
+  const [disableSave, setDisableSave]: any = useState(true);
+  const [lastTKeyPressTime, setLastTKeyPressTime] = useState(0);
+
+  const toggleDrawer = (anchor: string, open: boolean) => (event: any) => {
+    dispatch(setTaskDrawerStatusAction(open));
+    console.log("in toggle drawer function", open);
+    if (
+      event.type === "keydown" &&
+      ((event as React.KeyboardEvent).key === "Tab" ||
+        (event as React.KeyboardEvent).key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+  useEffect(() => {
+    function handleDoubleTap() {
+      console.log("working");
+      toggleDrawer("right", true)({});
+    }
+
+    function handleKeyDown(event: any) {
+      if (event.key === "t") {
+        const currentTime = new Date().getTime();
+        const elapsedTime = currentTime - lastTKeyPressTime;
+        setLastTKeyPressTime(currentTime);
+
+        if (elapsedTime < 300) {
+          // Adjust the time interval (in milliseconds) as per your preference
+          handleDoubleTap();
+        }
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [lastTKeyPressTime]);
+
+  const dispatch = useDispatch();
   useEffect(() => {
     const gettodos = databases.listDocuments(
       "647729ede7a0545acbb7",
@@ -115,30 +161,9 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
     setTodo(filterTodo);
   };
 
-  const toggleDrawer =
-    (anchor: string, open: boolean) =>
-    (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event.type === "keydown" &&
-        ((event as React.KeyboardEvent).key === "Tab" ||
-          (event as React.KeyboardEvent).key === "Shift")
-      ) {
-        return;
-      }
-
-      setState({ ...state, [anchor]: open });
-    };
-
   const addItemToContainer = (id: any, status: any) => {
+    setDisableSave(false);
     setTodo((prevTodo: any) => {
-      // const updatedTodo = prevTodo.map((item: any) => {
-      //   if (item.id === id) {
-
-      //     return { ...item, status: status };
-      //   }
-      //   return item;
-      // });
-
       const updatedTodo = prevTodo.filter((item: any) => item.id !== id);
       const newItem = prevTodo.find((item: any) => item.id === id);
       newItem.status = status;
@@ -160,9 +185,15 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
                 onClick={toggleDrawer(anchor, false)}
               />{" "}
             </p>
-            <Button variant="contained" onClick={() => handleSave()}>
+            <button
+              disabled={disableSave}
+              className={`bg-blue-500/80 py-1 px-6 mr-1 text-white rounded-md hover:bg-blue-500 ${
+                disableSave ? "bg-blue-500/30 hover:bg-blue-500/30" : ""
+              } `}
+              onClick={() => handleSave()}
+            >
               Save
-            </Button>
+            </button>
           </div>
 
           <div className="w-full flex justify-around h-[93vh] pt-4">
@@ -229,11 +260,11 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
                 </ul>
               </>
             ) : (
-              "No tasks in todos"
+              <p className="py-2">No tasks in todos</p>
             )
           }
         >
-          <div className="flex relative justify-center">
+          <div className="flex relative justify-center cursor-pointer">
             <RiTodoLine className="text-white text-[25px]" />
             <p className="bg-red-500 px-1.5 py-.5 text-[12px] absolute rounded-full -right-[1px] -top-[10px] border-black border-[2px]">
               {showTodo?.length}
@@ -257,11 +288,11 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
                 </ul>
               </>
             ) : (
-              "No tasks in progress"
+              <p className="py-2">No tasks in progress</p>
             )
           }
         >
-          <div className="flex relative justify-center">
+          <div className="flex relative justify-center cursor-pointer">
             <MdPendingActions className="text-white text-[25px]" />
             <p className="bg-yellow-500 px-1.5 py-.5 text-[12px] absolute rounded-full -right-[1px] -top-[10px] border-black border-[2px]">
               {showInProgress?.length}
@@ -282,11 +313,11 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
                 </ul>
               </>
             ) : (
-              "No tasks completed"
+              <p className="py-2">No tasks completed</p>
             )
           }
         >
-          <div className="flex relative justify-center">
+          <div className="flex relative justify-center cursor-pointer">
             <BiTask className="text-white text-[25px]" />
             <p className="bg-green-500 px-1.5 py-.5 text-[12px] absolute rounded-full -right-[1px] -top-[10px] border-black border-[2px]">
               {showComplted?.length}
@@ -297,7 +328,7 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
         <Drawer
           anchor="right"
           open={state["right"]}
-          onClose={toggleDrawer("right", false)}
+          // onClose={toggleDrawer("right", false)}
           PaperProps={{
             sx: {
               backgroundColor: "#040404db",

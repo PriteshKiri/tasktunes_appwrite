@@ -28,7 +28,9 @@ const TrackControls = () => {
   const currentTrack = useSelector(
     (state: any) => state.TrackControl.currentTrack
   );
-
+  const TaskDrawerStatus = useSelector(
+    (state: any) => state.Util.isTaskdrawerOpen
+  );
   // In-component states
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -64,12 +66,6 @@ const TrackControls = () => {
     }
   };
 
-  window.addEventListener("keydown", (e) => {
-    if (e.key === " ") {
-      handlePlayPause();
-    }
-  });
-
   const formatTime = (time: any) => {
     if (time && !isNaN(time)) {
       const minutes = Math.floor(time / 60);
@@ -93,7 +89,7 @@ const TrackControls = () => {
   }, [volume, audioEl, muteVolume]);
 
   window.addEventListener("keydown", (e) => {
-    if (e.key === "m") {
+    if (e.key === "m" && !TaskDrawerStatus) {
       setMuteVolume(!muteVolume);
     }
   });
@@ -110,12 +106,6 @@ const TrackControls = () => {
     }
   };
 
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight") {
-      handleNext();
-    }
-  });
-
   const handlePrevious = () => {
     if (trackIndex === 0) {
       const lastTrackIndex = tracks.length - 1;
@@ -131,12 +121,6 @@ const TrackControls = () => {
     }
   };
 
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") {
-      handlePrevious();
-    }
-  });
-
   return (
     <>
       {/* Display Track Image and name */}
@@ -149,7 +133,7 @@ const TrackControls = () => {
         <h3 className="text-white text-sm sm:text-base">
           {currentTrack?.trackName ?? "...Loading"}{" "}
         </h3>
-        <img
+        <img 
           className={` ${
             audioState ? "opacity-100" : "opacity-0"
           } w-[30px] h-[20px] sm:w-[40px] sm:h-[30px]`}

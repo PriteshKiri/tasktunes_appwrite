@@ -32,18 +32,24 @@ const TrackTile = ({ track, id }: any) => {
   }, [currentTrack]);
 
   return (
-    <div className="bg-white w-[90%] flex justify-between p-3 my-2 px-4 rounded-md drop-shadow-2xl ">
+    <div
+      className={`${
+        idplay && audioState ? "bg-white/70" : "bg-white"
+      }   w-[90%] flex justify-between p-3 my-2 px-4 rounded-md drop-shadow-2xl `}
+    >
       <div className="flex justify-start items-center gap-5">
         <img
           alt="audio_image"
-          className="w-[32px] h-[32px] rounded-full"
+          className={`w-[32px] h-[32px] rounded-full ${
+            idplay && audioState ? "rotate-track-img" : ""
+          }`}
           src={track?.trackImg ?? ""}
         />
         <p>{track?.trackName}</p>
       </div>
 
       <div
-        className="text-black "
+        className="text-black cursor-pointer"
         onClick={() => {
           dispatch(setTrackIndexAction(trackId));
 

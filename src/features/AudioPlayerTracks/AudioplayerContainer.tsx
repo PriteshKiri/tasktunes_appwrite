@@ -16,7 +16,7 @@ const AudioplayerContainer = () => {
   }
 
   const handleShuffel = () => {
-    const randomId = generateRandomInteger(1, tracks?.length);
+    const randomId = generateRandomInteger(1, tracks?.length - 1);
 
     dispatch(setTrackIndexAction(randomId));
 
@@ -24,12 +24,6 @@ const AudioplayerContainer = () => {
 
     dispatch(audioStatusAction(true));
   };
-
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "s") {
-      handleShuffel();
-    }
-  });
 
   return (
     <div className=" w-full sm:w-1/2 h-[50%]  sm:h-[100%] border-t-2 border-light-50 sm:border-transparent pt-6 sm:pt-0 flex flex-col justify-around ">
