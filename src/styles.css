@@ -465,3 +465,16 @@ input#click {
 .click-btn-shadow {
   box-shadow: -1px 3px 20px black;
 }
+
+.rotate-track-img {
+  animation: rotate-track-img 3s infinite linear;
+}
+
+@keyframes rotate-track-img {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
