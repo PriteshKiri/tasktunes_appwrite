@@ -5,7 +5,7 @@ import {
   audioStatusAction,
   setCurrentTrackAction,
   setTrackIndexAction,
-} from "../DisplayTrackControls/TrackControlSlice";
+} from "../../slices/TrackControlSlice";
 import tracks from "../../data/track";
 
 const TrackTile = ({ track, id }: any) => {

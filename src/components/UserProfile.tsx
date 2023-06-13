@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import {  FaUser } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 import { MdOutlineModeEditOutline } from "react-icons/md";
-import { Id,databases, storage } from "../appwrite/appwriteConfig";
+import { Id, databases, storage } from "../appwrite/appwriteConfig";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const UserProfile = ({ name, email, userId }: any) => {
-  const [image, setImage]: any = useState();
-  const [imgId, setImgID]: any = useState("");
+  const [image, setImage] = useState<any>();
+  const [imgId, setImgID] = useState<string>("");
 
   //Upload the image to appwrite
 
@@ -30,7 +30,9 @@ const UserProfile = ({ name, email, userId }: any) => {
       });
   }, []);
 
-  const uploadImage = async (e: any) => {
+  const uploadImage = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): Promise<void> => {
     e.preventDefault();
 
     const promise = storage.createFile(
@@ -134,7 +136,7 @@ const UserProfile = ({ name, email, userId }: any) => {
         </div>
 
         <p
-          onClick={(e) => uploadImage(e)}
+          onClick={(e: any) => uploadImage(e)}
           className="bg-blue-500 py-1 px-3 text-white rounded-md cursor-pointer"
         >
           save
