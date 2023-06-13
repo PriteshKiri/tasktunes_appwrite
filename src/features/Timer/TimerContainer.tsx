@@ -71,7 +71,7 @@ const TimerContainer = () => {
     const now = Date.now();
     const then = now + seconds * 1000;
     displayTimeLeft(seconds);
-    displayStatusMessage(then, seconds);
+    displayStatusMessage(then);
     dispatch(setSpeakStatusAction(false));
     const newIntervalId = setInterval(() => {
       const secondsLeft = Math.round((then - Date.now()) / 1000);
