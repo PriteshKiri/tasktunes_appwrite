@@ -3,16 +3,17 @@ import { account } from "../appwrite/appwriteConfig";
 import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
 import "../styles.css";
-import AudioplayerContainer from "../features/AudioPlayerTracks/AudioplayerContainer";
-import TrackControls from "../features/DisplayTrackControls/TrackControls";
-import TimerContainer from "../features/Timer/TimerContainer";
-import SideBarTile from "../components/SideBarTile";
-import Header from "../components/Header";
+import AudioplayerContainer from "./AudioPlayerTracks/AudioplayerContainer";
+import TrackControls from "./DisplayTrackControls/TrackControls";
+import TimerContainer from "./Timer/TimerContainer";
+import Header from "./Header";
 import { User } from "../app.models";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/util/Loader";
+import TaskDrawer from "../components/drawers/TaskDrawer";
 
-const Profile = () => {
+const Dashboard = () => {
   const [userDetails, setUserDetails]: [User | null, any] =
     useState<User | null>(null);
   const navigate = useNavigate();
@@ -25,8 +26,6 @@ const Profile = () => {
     const getData = account.get();
     getData.then(
       (res: User) => {
-        console.log(res);
-
         setUserDetails(res);
       },
       (err) => {
@@ -52,7 +51,7 @@ const Profile = () => {
               <AudioplayerContainer />
               <TimerContainer />
               <div className="fixed right-0 top-40">
-                <SideBarTile userDetails={userDetails} />
+                <TaskDrawer userDetails={userDetails} />
               </div>
             </div>
             <div className=" bg-black opacity-60 relative bottom-0 shadow-xl p-4 flex flex-row justify-around items-center gap-6  w-full h-[10vh]  px-4 sm:px-32">
@@ -61,15 +60,10 @@ const Profile = () => {
           </div>
         </div>
       ) : (
-        <div className="h-[100vh] flex justify-center items-center p-[40px] bg-black">
-          <div
-            className="w-24 h-24 rounded-full animate-spin
-  border-y border-solid border-white border-t-transparent shadow-md"
-          ></div>
-        </div>
+        <Loader />
       )}
     </>
   );
 };
 
-export default Profile;
+export default Dashboard;

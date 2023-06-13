@@ -1,5 +1,5 @@
 import { AiOutlinePlus } from "react-icons/ai";
-import TaskCard from "./TaskCard";
+import TaskCard from "../cards/TaskCard";
 import { useDrop } from "react-dnd";
 
 const TodoContainer = ({

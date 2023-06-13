@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { User } from "../app.models";
 import { styled } from "@mui/material/styles";
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
-import UserProfile from "./UserProfile";
+import UserProfile from "../components/UserProfile";
 import { useState } from "react";
 const Header = ({ userDetails }: { userDetails: User | null }) => {
   const navigate = useNavigate();

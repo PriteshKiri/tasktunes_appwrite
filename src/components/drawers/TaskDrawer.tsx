@@ -2,7 +2,7 @@ import { Box, Button, Drawer, Zoom } from "@mui/material";
 import { useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
-import { databases } from "../appwrite/appwriteConfig";
+import { databases } from "../../appwrite/appwriteConfig";
 import { styled } from "@mui/material/styles";
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 import { v4 as uuidv4 } from "uuid";
@@ -12,17 +12,17 @@ import { RiTodoLine } from "react-icons/ri";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import TodoContainer from "./TodoContainer";
-import InProgress from "./InProgress";
-import CompletedContainer from "./CompletedContainer";
+import TodoContainer from "../taskContainers/TodoContainer";
+import InProgress from "../taskContainers/InProgress";
+import CompletedContainer from "../taskContainers/CompletedContainer";
 import { MdPendingActions } from "react-icons/md";
 import { BiTask } from "react-icons/bi";
-import { User } from "../app.models";
+import { User } from "../../app.models";
 import { useDispatch } from "react-redux";
-import { setTaskDrawerStatusAction } from "../util/UtilSlice";
+import { setTaskDrawerStatusAction } from "../../util/UtilSlice";
 import { ToastContainer, toast } from "react-toastify";
 
-const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
+const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
   const [state, setState]: any = useState("right");
   const [todo, setTodo]: any = useState([]);
   const [showInProgress, setShowInProgress]: any = useState([]);
@@ -361,4 +361,4 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
   );
 };
 
-export default SideBarTile;
+export default TaskDrawer;
