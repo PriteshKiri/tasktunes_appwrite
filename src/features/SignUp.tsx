@@ -41,9 +41,6 @@ const SignUp = () => {
             createSession
               .then(() => {
                 navigate("/profile");
-                toast.error("oinnjnjn", {
-                  position: toast.POSITION.TOP_CENTER,
-                });
               })
               .catch((e) => {
                 toast.error(e.message, {
