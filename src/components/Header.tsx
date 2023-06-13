@@ -2,7 +2,7 @@ import { FaRegUser } from "react-icons/fa";
 import { TbLogout } from "react-icons/tb";
 import logo from "../assets/tt-logo.png";
 import { account } from "../appwrite/appwriteConfig";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { User } from "../app.models";
 import { styled } from "@mui/material/styles";
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";

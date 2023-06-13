@@ -20,7 +20,7 @@ const TimerContainer = () => {
   // In-component states
   const [currentTimer, setCurrentTimer] = useState("00:00");
   const [displayMessage, setDisplayMessage] = useState("⏰ Set your timer");
-  const [intervalId, setIntervalId] = useState(0);
+  const [intervalId, setIntervalId]: any = useState(0);
   // const [mode, setMode] = useState("");
   const [disabled, setDisabled] = useState(true);
   const TimerMode = useSelector((state: any) => state.TimerControl.timerMode);
@@ -66,7 +66,7 @@ const TimerContainer = () => {
     }`;
   }, [currentTimer]);
 
-  const timerLogic = (seconds: any) => {
+  const timerLogic: any = (seconds: any) => {
     clearInterval(intervalId);
     const now = Date.now();
     const then = now + seconds * 1000;
@@ -109,7 +109,7 @@ const TimerContainer = () => {
     setCurrentTimer(displayTime);
   };
 
-  const displayStatusMessage = (timestamp: any, time: any) => {
+  const displayStatusMessage = (timestamp: any) => {
     const end = new Date(timestamp);
     const hour = end.getHours();
     const adjustedHour = hour > 12 ? hour - 12 : hour;

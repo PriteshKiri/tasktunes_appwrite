@@ -1,5 +1,4 @@
 import { useDrop } from "react-dnd";
-import { MdDragIndicator } from "react-icons/md";
 import TaskCard from "./TaskCard";
 
 const CompletedContainer = ({ todo, deleteTodo, addItemToContainer }: any) => {

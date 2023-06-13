@@ -2,7 +2,7 @@ import { Box, Button, Drawer, Zoom } from "@mui/material";
 import { useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
-import { Id, databases } from "../appwrite/appwriteConfig";
+import { databases } from "../appwrite/appwriteConfig";
 import { styled } from "@mui/material/styles";
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 import { v4 as uuidv4 } from "uuid";
@@ -33,7 +33,7 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
   const [disableSave, setDisableSave]: any = useState(true);
   const [lastTKeyPressTime, setLastTKeyPressTime] = useState(0);
 
-  const toggleDrawer = (anchor: string, open: boolean) => (event: any) => {
+  const toggleDrawer = (anchor: string, open: boolean) => (e: any) => {
     dispatch(setTaskDrawerStatusAction(open));
     if (!open && !disableSave) {
       toast.error("Please click on 'Save' button to save your changes!", {
@@ -143,7 +143,7 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
     );
 
     updateDoc
-      .then((res) => {
+      .then(() => {
         setSaveAction(!saveAction);
 
         toast.success("Successfuly saved your changes!", {
@@ -161,10 +161,7 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
   const addTodo = () => {
     setDisableSave(false);
 
-    setTodo([
-      ...todo,
-      { id: uuidv4(), val: "Add your task", status: "todo" },
-    ]);
+    setTodo([...todo, { id: uuidv4(), val: "Add your task", status: "todo" }]);
   };
 
   const deleteTodo = (id: any) => {

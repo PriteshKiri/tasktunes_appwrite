@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { FaRegUser, FaUser } from "react-icons/fa";
+import {  FaUser } from "react-icons/fa";
 import { MdOutlineModeEditOutline } from "react-icons/md";
-import { Id, account, databases, storage } from "../appwrite/appwriteConfig";
-import { v4 as uuidv4 } from "uuid";
+import { Id,databases, storage } from "../appwrite/appwriteConfig";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const UserProfile = ({ name, email, userId }: any) => {

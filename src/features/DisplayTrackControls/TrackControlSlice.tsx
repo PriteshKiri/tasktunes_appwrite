@@ -1,14 +1,14 @@
-import { createSlice, current } from '@reduxjs/toolkit';
-import tracks from '../../data/track';
+import { createSlice } from "@reduxjs/toolkit";
+import tracks from "../../data/track";
 
 const initialState = {
   audioStatus: false,
   trackIndex: 0,
-  currentTrack: tracks[0]
+  currentTrack: tracks[0],
 };
 
 const TrackControlSlice = createSlice({
-  name: 'item',
+  name: "item",
   initialState,
   reducers: {
     audioStatusAction: (state, action) => {
@@ -37,8 +37,8 @@ const TrackControlSlice = createSlice({
     },
     setCurrentTrackAction: (state, action) => {
       state.currentTrack = action.payload;
-    }
-  }
+    },
+  },
 });
 
 export default TrackControlSlice.reducer;
@@ -47,5 +47,5 @@ export const {
   setTrackIndexNextAction,
   setTrackIndexAction,
   setTrackIndexPreviousAction,
-  setCurrentTrackAction
+  setCurrentTrackAction,
 } = TrackControlSlice.actions;
