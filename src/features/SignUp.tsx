@@ -5,6 +5,9 @@ import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import TTlogo from "../assets/tasktunes_logo_animated.png";
 import { ToastContainer, toast } from "react-toastify";
+import { GrTwitter } from "react-icons/gr";
+import { BsGithub } from "react-icons/bs";
+import { ImLinkedin } from "react-icons/im";
 const SignUp = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -63,7 +66,7 @@ const SignUp = () => {
   };
 
   return (
-    <>
+    <div className="bg-black sm:h-[100vh] flex flex-col items-center">
       <ToastContainer
         position="top-center"
         autoClose={5000}
@@ -76,7 +79,7 @@ const SignUp = () => {
         pauseOnHover
         theme="dark"
       />
-      <div className="w-full h-full flex flex-col bg-black gap-y-8">
+      <div className="w-full h-full flex flex-col sm:flex-row justify-around items-center bg-black gap-y-8 mt-4">
         <div>
           <div className="logo mt-6 text-white">
             <div className="wrap">
@@ -90,18 +93,18 @@ const SignUp = () => {
                 Tunes
               </span>
             </h1>
-            <p>one stop to your productivity</p>
+            <p>One stop to your productivity!</p>
           </div>
           <div></div>
         </div>
-        <div className="p-[80px]">
-          <div className="relative py-3 sm:max-w-xl sm:mx-auto bg-black w-full h-full text-black w-[500px] height-[500px]">
-            <div className="absolute w-[500px] height-[500px] inset-0 bg-gradient-to-r from-blue-300 to-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-            <div className="relative px-1 py-10 pt-[35px] shadow-lg sm:rounded-3xl sm:p-10 sm:pb-20 text-white bg-black bdr-all">
+        <div className=" p-8 sm:p-[50px] sm:bg-gradient-to-r  from-[#15283d] via-black to-[#0d2f2c] rounded-3xl">
+          <div className="relative rounded-3xl sm:max-w-xl sm:mx-auto bg-black w-full h-full text-black sm:w-[500px] sm:height-[500px]">
+            <div className="relative px-6 sm:px-4 py-24 sm:py-10 pt-[35px] shadow-lg rounded-3xl sm:p-10 sm:pb-20 text-white bg-black/60 bdr-all">
               <div className="max-w-md mx-auto">
                 <div>
                   <h1 className="text-2xl font-semibold  text-left ">
-                    Welcome to the focus hub!
+                    Welcome to the <span className="text-blue-400">Focus</span>{" "}
+                    hub!
                   </h1>
                 </div>
                 <div className="divide-y divide-gray-200">
@@ -148,10 +151,10 @@ const SignUp = () => {
                     </div>
                     <div className="relative">
                       <button
-                        className="bg-blue-500 text-white rounded-md px-2 py-1"
+                        className="bg-blue-500 hover:bg-blue-500/60 cursor-pointer text-white rounded-md px-4 py-2 text-sm mt-4"
                         onClick={signUpUser}
                       >
-                        Submit
+                        Sign Up
                       </button>
                     </div>
                   </div>
@@ -176,90 +179,46 @@ const SignUp = () => {
         </div>
       </div>
 
-      {/* <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-        <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-          <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
-            <div className="max-w-md mx-auto">
-              <div>
-                <h1 className="text-2xl font-semibold">
-                  Signup Form with Floating Labels
-                </h1>
-              </div>
-              <div className="divide-y divide-gray-200">
-                <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                  <div className="relative">
-                    <input
-                      autoComplete="off"
-                      id="name"
-                      name="name"
-                      type="text"
-                      className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                      placeholder="name"
-                      onChange={(e) => {
-                        setUser({ ...user, name: e.target.value });
-                      }}
-                    />
-                    <label
-                      htmlFor="email"
-                      className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                    >
-                      Name
-                    </label>
-                  </div>
-                  <div className="relative">
-                    <input
-                      autoComplete="off"
-                      id="email"
-                      name="email"
-                      type="text"
-                      className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                      placeholder="Email address"
-                      onChange={(e) => {
-                        setUser({ ...user, email: e.target.value });
-                      }}
-                    />
-                    <label
-                      htmlFor="email"
-                      className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                    >
-                      Email Address
-                    </label>
-                  </div>
-                  <div className="relative">
-                    <input
-                      autoComplete="off"
-                      id="password"
-                      name="password"
-                      type="password"
-                      className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                      placeholder="Password"
-                      onChange={(e) => {
-                        setUser({ ...user, password: e.target.value });
-                      }}
-                    />
-                    <label
-                      htmlFor="password"
-                      className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                    >
-                      Password
-                    </label>
-                  </div>
-                  <div className="relative">
-                    <button
-                      className="bg-blue-500 text-white rounded-md px-2 py-1"
-                      onClick={signUpUser}
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <footer className="text-white flex flex-col sm:flex-row justify-between items-center w-[80%]  px-4 sm:px-6 pb-6 sm:pb-4 bdr-t pt-6 bg-black gap-y-6 sm:gap-y-0">
+        <p className="text-sm text-gray-600 mr-4 text-center">
+          © 2023 Tasktunes.{" "}
+          <small className="text-sm">
+            Made with &lt; 🧠 /&gt; by{" "}
+            <a
+              href="https://twitter.com/PriteshKiri"
+              className="text-white hover:underline"
+            >
+              Pritesh Kiri
+            </a>
+          </small>
+        </p>
+        <div className="text-white flex gap-x-6">
+          <a
+            href="https://twitter.com/PriteshKiri"
+            target="_blank"
+            className="hover:text-blue-500"
+          >
+            <GrTwitter />
+          </a>
+
+          <a
+            href="https://github.com/PriteshKiri/tasktunes_appwrite"
+            target="_blank"
+            className="hover:text-blue-500"
+          >
+            <BsGithub />
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/pritesh-kiri/"
+            target="_blank"
+            className="hover:text-blue-500"
+          >
+            <ImLinkedin />
+          </a>
         </div>
-      </div> */}
-    </>
+      </footer>
+    </div>
   );
 };
 

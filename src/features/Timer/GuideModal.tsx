@@ -71,20 +71,20 @@ const GuideModal = () => {
           }
         }}
       >
-        <Box className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[90vw] h-[80vh] overflow-y-auto sm:w-[50vw] sm:h-[70vh] bg-white/95 shadow-2xl p-4 rounded-lg">
-          {!speakStatus ? (
-            <>
-              {" "}
-              <div className="flex justify-between">
-                <div>🎧 TaskTunes</div>{" "}
-                <MdClose
-                  className="cursor-pointer"
-                  onClick={() => setOpenModal(false)}
-                />
-              </div>
-              <Instruction />
-            </>
-          ) : (
+        {!speakStatus ? (
+          <Box className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[90vw] h-[80vh] overflow-y-auto sm:w-[50vw] sm:h-[70vh] bg-white/95 shadow-2xl p-4 rounded-lg">
+            {" "}
+            <div className="flex justify-between">
+              <div>🎧 TaskTunes</div>{" "}
+              <MdClose
+                className="cursor-pointer"
+                onClick={() => setOpenModal(false)}
+              />
+            </div>
+            <Instruction />
+          </Box>
+        ) : (
+          <Box className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[90vw] h-[65vh] sm:h-[70vh] overflow-y-auto sm:w-[35vw] sm:h-[70vh] bg-white/95 shadow-2xl p-4 rounded-lg">
             <div className="flex flex-col items-center justify-start w-full h-full gap-y-6 relative">
               <div className=" w-full flex justify-end">
                 <MdClose
@@ -100,9 +100,9 @@ const GuideModal = () => {
               {TimerMode === "work" ? (
                 <div className="flex flex-col items-center mt-24 relative gap-y-8">
                   {" "}
-                  <div className=" w-[500px] flex items-center justify-center relative">
+                  <div className="flex items-center justify-center relative">
                     <p
-                      className={`bg-clip-text font-mono font-italic text-transparent exercise-bg  text-center w-[90%] transition-all absolute ${
+                      className={`bg-clip-text sm:w-[500px] font-mono font-bold font-italic text-transparent exercise-bg  text-center w-[300px] sm:w-[90%] transition-all absolute ${
                         openGift
                           ? "opacity-100 bottom-12 text-[18px] "
                           : "opacity-0 -bottom-5 text-[10px] "
@@ -130,7 +130,7 @@ const GuideModal = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="waviy">
+                  <div className="waviy text-[15px] sm:text-[30px]">
                     <span style={spanStyles[0]}>C</span>
                     <span style={spanStyles[1]}>O</span>
                     <span style={spanStyles[2]}>N</span>
@@ -149,12 +149,12 @@ const GuideModal = () => {
                   </div>
                   <h2 className="text-xl">
                     "{" "}
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-500 ">
+                    <span className="w-[300px]  sm:w-full bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-500 ">
                       {quoteVal?.quote}
                     </span>{" "}
                     "
                   </h2>
-                  <p className=" ">
+                  <p className="w-[300px] text-center sm:w-full">
                     It's break time now, tap on the gift box :)
                   </p>
                 </div>
@@ -205,8 +205,8 @@ drop-shadow-xl "
                 </div>
               )}
             </div>
-          )}
-        </Box>
+          </Box>
+        )}
       </Modal>
     </div>
   );

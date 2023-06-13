@@ -531,28 +531,6 @@ h1 {
   background: rgba(20, 20, 20, 1);
 }
 
-@media screen and (max-width: 480px) {
-  .container {
-    padding: 100px 10px;
-  }
-
-  .animated_logo {
-    width: 100px;
-  }
-
-  .wrap {
-    width: 45px;
-    top: 40px;
-  }
-  .wrap .eye {
-    width: 12px;
-    height: 12px;
-  }
-  .wrap .eye:before {
-    width: 8px;
-    height: 8px;
-  }
-}
 .wrap .eye.grin:after,
 .wrap .eye.sad:after {
   content: "";
@@ -601,58 +579,5 @@ h1 {
   50%,
   100% {
     top: 0;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .container {
-    padding: 100px 10px;
-  }
-
-  img {
-    width: 250px;
-  }
-
-  .animated_logo {
-    width: 100px;
-  }
-
-  .wrap {
-    width: 45px;
-    top: 40px;
-  }
-  .wrap .eye {
-    width: 12px;
-    height: 12px;
-  }
-  .wrap .eye:before {
-    width: 8px;
-    height: 8px;
-  }
-
-  @keyframes sadb {
-    0%,
-    10% {
-      top: 0;
-    }
-    10%,
-    12% {
-      height: 1px;
-    }
-    14% {
-      height: 8px;
-    }
-    30%,
-    40% {
-      top: 50%;
-    }
-    60%,
-    50% {
-      top: -50%;
-    }
-    50%,
-    100% {
-      top: 0;
-    }
   }
 }

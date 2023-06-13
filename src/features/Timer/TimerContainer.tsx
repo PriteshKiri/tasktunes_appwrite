@@ -234,7 +234,7 @@ const TimerContainer = () => {
         >
           <input
             className="p-2 pl-4 rounded-l-3xl"
-            min={1}
+            min={0}
             name="minutes"
             placeholder="Enter Minutes"
             ref={inputRef}
