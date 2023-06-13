@@ -3,6 +3,9 @@ import { account } from "../appwrite/appwriteConfig";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import TTlogo from "../assets/tasktunes_logo_animated.png";
+import { BsGithub } from "react-icons/bs";
+import { ImLinkedin } from "react-icons/im";
+import { GrTwitter } from "react-icons/gr";
 const Login = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -25,7 +28,7 @@ const Login = () => {
       });
   };
   return (
-    <>
+    <div className="bg-black sm:h-[100vh] flex flex-col items-center">
       <ToastContainer
         position="top-center"
         autoClose={5000}
@@ -38,7 +41,7 @@ const Login = () => {
         pauseOnHover
         theme="dark"
       />
-      <div className="w-full h-full flex flex-col bg-black gap-y-8">
+      <div className="w-full h-full flex flex-col sm:flex-row justify-around items-center bg-black gap-y-8 mt-4">
         <div>
           <div className="logo mt-6 text-white">
             <div className="wrap">
@@ -52,14 +55,13 @@ const Login = () => {
                 Tunes
               </span>
             </h1>
-            <p>one stop to your productivity</p>
+            <p>One stop to your productivity!</p>
           </div>
           <div></div>
         </div>
-        <div className="p-[80px]">
-          <div className="relative py-3 sm:max-w-xl sm:mx-auto bg-black w-full h-full text-black w-[500px] height-[500px]">
-            <div className="absolute w-[500px] height-[500px] inset-0 bg-gradient-to-r from-blue-300 to-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-            <div className="relative px-4 py-10 pt-[35px] shadow-lg sm:rounded-3xl sm:p-10 sm:pb-20 text-white bg-black bdr-all">
+        <div className="p-[50px] bg-gradient-to-r  from-[#15283d] via-black to-[#0d2f2c] rounded-3xl">
+          <div className="relative rounded-3xl sm:max-w-xl sm:mx-auto bg-black w-full h-full text-black w-[500px] height-[500px]">
+            <div className="relative px-4 py-10 pt-[35px] shadow-lg sm:rounded-3xl sm:p-10 sm:pb-20 text-white bg-black/60 bdr-all">
               <div className="max-w-md mx-auto">
                 <div>
                   <h1 className="text-2xl font-semibold  text-left ">
@@ -97,7 +99,7 @@ const Login = () => {
                     </div>
                     <div className="relative">
                       <button
-                        className="bg-blue-500 text-white rounded-md px-2 py-1"
+                        className="bg-blue-500 hover:bg-blue-500/60 cursor-pointer text-white rounded-md px-4 py-2 text-sm mt-4"
                         onClick={LoginUser}
                       >
                         Submit
@@ -124,7 +126,46 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </>
+      <footer className="text-white flex justify-between items-center w-[80%]  px-4 sm:px-6 sm:pb-4 bdr-t pt-6 bg-black">
+        <p className="text-sm text-gray-600 mr-4 text-center">
+          © 2023 Tasktunes.{" "}
+          <small className="text-sm">
+            Made with &lt; 🧠 /&gt; by{" "}
+            <a
+              href="https://twitter.com/PriteshKiri"
+              className="text-white hover:underline"
+            >
+              Pritesh Kiri
+            </a>
+          </small>
+        </p>
+        <div className="text-white flex gap-x-6">
+          <a
+            href="https://twitter.com/PriteshKiri"
+            target="_blank"
+            className="hover:text-blue-500"
+          >
+            <GrTwitter />
+          </a>
+
+          <a
+            href="https://github.com/PriteshKiri/tasktunes_appwrite"
+            target="_blank"
+            className="hover:text-blue-500"
+          >
+            <BsGithub />
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/pritesh-kiri/"
+            target="_blank"
+            className="hover:text-blue-500"
+          >
+            <ImLinkedin />
+          </a>
+        </div>
+      </footer>
+    </div>
   );
 };
 
