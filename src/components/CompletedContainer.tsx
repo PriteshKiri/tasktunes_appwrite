@@ -2,7 +2,7 @@ import { useDrop } from "react-dnd";
 import { MdDragIndicator } from "react-icons/md";
 import TaskCard from "./TaskCard";
 
-const CompletedContainer = ({ todo, addItemToContainer }: any) => {
+const CompletedContainer = ({ todo, deleteTodo, addItemToContainer }: any) => {
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "task",
     drop: (item: any) => addItemToContainer(item.id, "completed"),
@@ -26,7 +26,7 @@ const CompletedContainer = ({ todo, addItemToContainer }: any) => {
         {todo
           .filter((item: any) => item.status === "completed")
           .map((item: any) => (
-            <TaskCard key={item.id} item={item} />
+            <TaskCard key={item.id} item={item} deleteTodo={deleteTodo} />
           ))}
       </div>
     </div>

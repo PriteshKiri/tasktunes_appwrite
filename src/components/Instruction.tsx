@@ -7,7 +7,7 @@ const Instruction = () => {
       <br />
       <br />
       <span>
-        Welcome to <strong>CodeNChill</strong> , the one-stop tool to take your{" "}
+        Welcome to <strong>TaskTunes</strong> , the one-stop tool to take your{" "}
         <strong>productivity</strong> to the next level 🚀
       </span>
       <br />

@@ -27,9 +27,7 @@ const TaskCard = ({ item, handleInputChange, deleteTodo, status }: any) => {
         onChange={(e) => handleInputChange(item.id, e.target.value)}
       />
       <MdDelete
-        className={`text-white text-[20px] hover:text-red-500 cursor-pointer ${
-          status === "todo" ? "block" : "hidden"
-        } `}
+        className={`text-white text-[20px] hover:text-red-500 cursor-pointer `}
         onClick={() => deleteTodo(item.id)}
       />
     </div>

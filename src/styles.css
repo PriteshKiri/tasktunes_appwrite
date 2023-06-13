@@ -478,3 +478,181 @@ input#click {
     transform: rotate(359deg);
   }
 }
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.animated_logo {
+  width: 300px;
+}
+
+h1 {
+  font-family: "Shantell Sans", "Courier New", Courier, monospace;
+  color: white;
+  text-align: center;
+}
+
+.wrap {
+  position: absolute;
+  width: 100px;
+  height: auto;
+  color: black;
+  display: flex;
+  top: 90px;
+}
+.wrap .eye {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  background: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-block;
+  overflow: hidden;
+}
+.wrap .eye:before {
+  content: "";
+  position: absolute;
+  margin: auto;
+  width: 15px;
+  height: 15px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background: rgba(20, 20, 20, 1);
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 100px 10px;
+  }
+
+  .animated_logo {
+    width: 100px;
+  }
+
+  .wrap {
+    width: 45px;
+    top: 40px;
+  }
+  .wrap .eye {
+    width: 12px;
+    height: 12px;
+  }
+  .wrap .eye:before {
+    width: 8px;
+    height: 8px;
+  }
+}
+.wrap .eye.grin:after,
+.wrap .eye.sad:after {
+  content: "";
+  position: absolute;
+  width: calc(100% + 20px);
+  height: 0;
+  border-radius: 50%;
+  background: white;
+  left: -10px;
+}
+.wrap .eye.grin:after {
+  bottom: -10px;
+}
+.wrap .eye.sad:after {
+  top: -10px;
+}
+.wrap .eye:first-child {
+  left: 0;
+}
+.wrap .eye:last-child {
+  right: 0;
+}
+.wrap .eye.down:before {
+  animation: sadb 5s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+}
+@keyframes sadb {
+  0%,
+  10% {
+    top: 0;
+  }
+  10%,
+  12% {
+    height: 1px;
+  }
+  14% {
+    height: 12px;
+  }
+  30%,
+  40% {
+    top: 50%;
+  }
+  60%,
+  50% {
+    top: -50%;
+  }
+  50%,
+  100% {
+    top: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 100px 10px;
+  }
+
+  img {
+    width: 250px;
+  }
+
+  .animated_logo {
+    width: 100px;
+  }
+
+  .wrap {
+    width: 45px;
+    top: 40px;
+  }
+  .wrap .eye {
+    width: 12px;
+    height: 12px;
+  }
+  .wrap .eye:before {
+    width: 8px;
+    height: 8px;
+  }
+
+  @keyframes sadb {
+    0%,
+    10% {
+      top: 0;
+    }
+    10%,
+    12% {
+      height: 1px;
+    }
+    14% {
+      height: 8px;
+    }
+    30%,
+    40% {
+      top: 50%;
+    }
+    60%,
+    50% {
+      top: -50%;
+    }
+    50%,
+    100% {
+      top: 0;
+    }
+  }
+}
