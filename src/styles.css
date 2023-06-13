@@ -136,7 +136,11 @@ input#click {
 #click:checked + .click {
   transform: rotate(-180deg) scaleX(0.85);
 }
-
+@media only screen and (max-width: 480px) {
+  #click:checked + .click {
+    transform: rotate(-225deg) scaleX(0.85);
+  }
+}
 .wishes {
   position: absolute;
   transition: 0.5s;

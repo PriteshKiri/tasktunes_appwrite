@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { audioStatusAction } from "../DisplayTrackControls/TrackControlSlice";
-import GuideModal from "./GuideModal";
+import GuideModal from "../../components/modals/GuideModal";
 import { setSpeakStatusAction } from "./TimerControlSlice";
 import { setTimerModeAction } from "./TimerControlSlice";
 
@@ -159,7 +159,9 @@ const TimerContainer = () => {
             currentTimer === "00:00" ? "" : "timer_dial"
           }`}
         >
-          <div className="text-[28px] sm:text-[30px] font-bold ">{currentTimer}</div>
+          <div className="text-[28px] sm:text-[30px] font-bold ">
+            {currentTimer}
+          </div>
         </div>
         <p className="opacity-0 sm:opacity-100 display__end-time text-white text-xl sm:text-2xl font-extrabold mt-8">
           {displayMessage}

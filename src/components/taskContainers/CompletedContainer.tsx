@@ -1,5 +1,5 @@
 import { useDrop } from "react-dnd";
-import TaskCard from "./TaskCard";
+import TaskCard from "../cards/TaskCard";
 
 const CompletedContainer = ({ todo, deleteTodo, addItemToContainer }: any) => {
   const [{ isOver }, drop] = useDrop(() => ({

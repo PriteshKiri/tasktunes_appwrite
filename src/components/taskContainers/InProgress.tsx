@@ -1,7 +1,7 @@
 import { useDrop } from "react-dnd";
-import TaskCard from "./TaskCard";
+import TaskCard from "../cards/TaskCard";
 
-const InProgress = ({ todo,  deleteTodo, addItemToContainer }: any) => {
+const InProgress = ({ todo, deleteTodo, addItemToContainer }: any) => {
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "task",
     drop: (item: any) => addItemToContainer(item.id, "inprogress"),
@@ -26,7 +26,7 @@ const InProgress = ({ todo,  deleteTodo, addItemToContainer }: any) => {
         {todo
           .filter((item: any) => item.status === "inprogress")
           .map((item: any) => (
-            <TaskCard key={item.id} item={item} deleteTodo={deleteTodo}/>
+            <TaskCard key={item.id} item={item} deleteTodo={deleteTodo} />
           ))}
       </div>
     </div>
