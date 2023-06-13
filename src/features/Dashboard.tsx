@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { account } from "../appwrite/appwriteConfig";
 import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
-import "../styles.css";
+import "../styles/styles.css";
 import AudioplayerContainer from "./AudioPlayerTracks/AudioplayerContainer";
 import TrackControls from "./DisplayTrackControls/TrackControls";
 import TimerContainer from "./Timer/TimerContainer";
@@ -29,7 +29,7 @@ const Dashboard = () => {
         setUserDetails(res);
       },
       (err) => {
-        navigate("/");
+        navigate("/login");
         console.log(err);
       }
     );

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { audioStatusAction } from "../DisplayTrackControls/TrackControlSlice";
+import { audioStatusAction } from "../../slices/TrackControlSlice";
 import GuideModal from "../../components/modals/GuideModal";
-import { setSpeakStatusAction } from "./TimerControlSlice";
-import { setTimerModeAction } from "./TimerControlSlice";
+import { setSpeakStatusAction } from "../../slices/TimerControlSlice";
+import { setTimerModeAction } from "../../slices/TimerControlSlice";
 
 const TimerContainer = () => {
   const inputRef: any = useRef(null);
@@ -21,11 +21,10 @@ const TimerContainer = () => {
   const [currentTimer, setCurrentTimer] = useState("00:00");
   const [displayMessage, setDisplayMessage] = useState("⏰ Set your timer");
   const [intervalId, setIntervalId]: any = useState(0);
-
   const [disabled, setDisabled] = useState(true);
   const TimerMode = useSelector((state: any) => state.TimerControl.timerMode);
 
-  console.log("timerrrrr mode", TimerMode);
+  // console.log("timerrrrr mode", TimerMode);
 
   const handleDisable = () => {
     if (inputRef.current) {
@@ -50,7 +49,7 @@ const TimerContainer = () => {
     } else if (speakStatus && TimerMode === "work") {
       dispatch(audioStatusAction(false));
       const utterance = new SpeechSynthesisUtterance(
-        "Congratulation on complted your task successfully! It's time to take some rest now."
+        "Congratulation on completing your task successfully! It's time to take some rest now."
       );
       utterance.voice = synth.getVoices()[145];
       synth.speak(utterance);
@@ -71,7 +70,30 @@ const TimerContainer = () => {
     const now = Date.now();
     const then = now + seconds * 1000;
     displayTimeLeft(seconds);
-    displayStatusMessage(then);
+    displayStatusMessage(then, seconds);
+    dispatch(setSpeakStatusAction(false));
+    const newIntervalId = setInterval(() => {
+      const secondsLeft = Math.round((then - Date.now()) / 1000);
+      displayTimeLeft(seconds);
+
+      if (secondsLeft < 1) {
+        dispatch(setSpeakStatusAction(true));
+
+        resetRef.current.click();
+
+        return;
+      }
+      displayTimeLeft(secondsLeft);
+    }, 1000);
+    setIntervalId(newIntervalId);
+  };
+
+  const customTimerLogic: any = (seconds: any) => {
+    clearInterval(intervalId);
+    const now = Date.now();
+    const then = now + seconds * 1000;
+    displayTimeLeft(seconds);
+    customDisplayStatusMessage(then, seconds);
     dispatch(setSpeakStatusAction(false));
     const newIntervalId = setInterval(() => {
       const secondsLeft = Math.round((then - Date.now()) / 1000);
@@ -109,21 +131,46 @@ const TimerContainer = () => {
     setCurrentTimer(displayTime);
   };
 
-  const displayStatusMessage = (timestamp: any) => {
+  const customDisplayStatusMessage = (timestamp: any, time: any) => {
     const end = new Date(timestamp);
     const hour = end.getHours();
     const adjustedHour = hour > 12 ? hour - 12 : hour;
     const timeStatus = hour > 12 ? "PM" : "AM";
     const minutes = end.getMinutes();
-    // if (time <= 300) {
-    // setMode("rest");
     if (TimerMode === "rest") {
+      // setMode("rest");
+      // dispatch(setTimerModeAction("rest"));
       const textContent = ` 💻  Back to work at ${adjustedHour}:${
         minutes < 10 ? "0" : ""
       }${minutes} ${timeStatus} `;
       setDisplayMessage(textContent);
     } else {
       // setMode("work");
+      // dispatch(setTimerModeAction("work"));
+
+      const textContent = ` 🥤 Take some rest at ${adjustedHour}:${
+        minutes < 10 ? "0" : ""
+      }${minutes} ${timeStatus}`;
+      setDisplayMessage(textContent);
+    }
+  };
+
+  const displayStatusMessage = (timestamp: any, time: any) => {
+    const end = new Date(timestamp);
+    const hour = end.getHours();
+    const adjustedHour = hour > 12 ? hour - 12 : hour;
+    const timeStatus = hour > 12 ? "PM" : "AM";
+    const minutes = end.getMinutes();
+    if (time <= 300) {
+      // setMode("rest");
+      dispatch(setTimerModeAction("rest"));
+      const textContent = ` 💻  Back to work at ${adjustedHour}:${
+        minutes < 10 ? "0" : ""
+      }${minutes} ${timeStatus} `;
+      setDisplayMessage(textContent);
+    } else {
+      // setMode("work");
+      dispatch(setTimerModeAction("work"));
 
       const textContent = ` 🥤 Take some rest at ${adjustedHour}:${
         minutes < 10 ? "0" : ""
@@ -137,10 +184,15 @@ const TimerContainer = () => {
     timerLogic(seconds);
   };
 
+  const customStartTimer = (inputTime: any) => {
+    const seconds = parseInt(inputTime);
+    customTimerLogic(seconds);
+  };
+
   const customTime = (e: any) => {
     if (!disabled) {
       e.preventDefault();
-      startTimer(e.target.elements.minutes.value * 60);
+      customStartTimer(e.target.elements.minutes.value * 60);
       if (inputRef.current) {
         inputRef.current.value = "";
       }
@@ -173,7 +225,6 @@ const TimerContainer = () => {
           <button
             className="bg-white px-6 py-2 w-[50%] text-center rounded-tl-3xl border-b-2 border-r-2  border-slate-500 drop-shadow-2xl hover:opacity-80 focus:opacity-70"
             onClick={() => {
-              dispatch(setTimerModeAction("rest"));
               startTimer("300");
             }}
           >
@@ -182,7 +233,6 @@ const TimerContainer = () => {
           <button
             className="bg-white px-6 py-2 w-[50%] rounded-tr-3xl border-b-2 border-l-2  border-slate-500 drop-shadow-2xl hover:opacity-80  focus:opacity-70"
             onClick={() => {
-              dispatch(setTimerModeAction("work"));
               startTimer("900");
             }}
           >
@@ -191,7 +241,6 @@ const TimerContainer = () => {
           <button
             className="bg-white px-6 py-2 w-[50%] rounded-bl-3xl border-t-2 border-r-2  border-slate-500  drop-shadow-2xl hover:opacity-80 focus:opacity-70"
             onClick={() => {
-              dispatch(setTimerModeAction("work"));
               startTimer("1500");
             }}
           >
@@ -202,7 +251,6 @@ const TimerContainer = () => {
             className="bg-white px-6 py-2  w-[50%] rounded-br-3xl border-t-2 border-l-2  border-slate-500 drop-shadow-2xl hover:opacity-80 "
             ref={resetRef}
             onClick={() => {
-              dispatch(setTimerModeAction(""));
               handleResetTimer();
             }}
           >
@@ -211,22 +259,26 @@ const TimerContainer = () => {
         </div>
         {/* Mode display */}
         <div className="text-black font-bold w-[190px] h-[40px] flex bg-white rounded-md p-1">
-          <p
+          <button
             className={`w-[50%] py-1 flex justify-center items-center cursor-pointer rounded-md ${
               TimerMode === "work" ? "bg-blue-500 text-white" : ""
             }`}
-            onClick={() => dispatch(setTimerModeAction("work"))}
+            onClick={() => {
+              dispatch(setTimerModeAction("work"));
+            }}
           >
             Work
-          </p>
-          <p
+          </button>
+          <button
             className={`w-[50%] py-1 flex justify-center items-center cursor-pointer rounded-md ${
               TimerMode === "rest" ? "bg-blue-500 text-white" : ""
             }`}
-            onClick={() => dispatch(setTimerModeAction("rest"))}
+            onClick={() => {
+              dispatch(setTimerModeAction("rest"));
+            }}
           >
             Rest
-          </p>
+          </button>
         </div>
 
         {/* Custom input */}

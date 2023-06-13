@@ -19,10 +19,10 @@ const Login = () => {
     getData.then(
       (res: User) => {
         console.log(res);
-        navigate("/profile");
+        navigate("/");
       },
       (err) => {
-        navigate("/");
+        navigate("/login");
         console.log(err);
       }
     );
@@ -33,7 +33,7 @@ const Login = () => {
 
     promise
       .then(() => {
-        navigate("/profile");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);

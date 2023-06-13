@@ -12,7 +12,7 @@ import {
   setTrackIndexNextAction,
   setTrackIndexPreviousAction,
   setCurrentTrackAction,
-} from "./TrackControlSlice";
+} from "../../slices/TrackControlSlice";
 import tracks from "../../data/track";
 import musicGif from "../../assets/playing.gif";
 const TrackControls = () => {
@@ -32,10 +32,10 @@ const TrackControls = () => {
     (state: any) => state.Util.isTaskdrawerOpen
   );
   // In-component states
-  const [timeProgress, setTimeProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(60);
-  const [muteVolume, setMuteVolume] = useState(false);
+  const [timeProgress, setTimeProgress] = useState<number>(0);
+  const [duration, setDuration] = useState<number>(0);
+  const [volume, setVolume] = useState<number>(60);
+  const [muteVolume, setMuteVolume] = useState<boolean>(false);
 
   const onLoadedMetadata = () => {
     const seconds = audioEl?.current?.duration;
@@ -133,7 +133,7 @@ const TrackControls = () => {
         <h3 className="text-white text-sm sm:text-base">
           {currentTrack?.trackName ?? "...Loading"}{" "}
         </h3>
-        <img 
+        <img
           className={` ${
             audioState ? "opacity-100" : "opacity-0"
           } w-[30px] h-[20px] sm:w-[40px] sm:h-[30px]`}

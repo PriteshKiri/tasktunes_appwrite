@@ -21,10 +21,11 @@ const SignUp = () => {
     getData.then(
       (res: User) => {
         console.log(res);
-        navigate("/profile");
+        navigate("/");
       },
       (err) => {
         console.log(err);
+        navigate("/signup");
       }
     );
   }, []);
@@ -55,7 +56,7 @@ const SignUp = () => {
             );
             createSession
               .then(() => {
-                navigate("/profile");
+                navigate("/");
               })
               .catch((e) => {
                 toast.error(e.message, {

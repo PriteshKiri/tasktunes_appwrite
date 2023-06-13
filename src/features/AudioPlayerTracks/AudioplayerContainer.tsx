@@ -6,12 +6,12 @@ import {
   audioStatusAction,
   setCurrentTrackAction,
   setTrackIndexAction,
-} from "../DisplayTrackControls/TrackControlSlice";
+} from "../../slices/TrackControlSlice";
 
 const AudioplayerContainer = () => {
   const dispatch = useDispatch();
 
-  function generateRandomInteger(min: any, max: any) {
+  function generateRandomInteger(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 

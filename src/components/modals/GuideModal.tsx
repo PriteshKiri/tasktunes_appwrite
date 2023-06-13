@@ -5,21 +5,11 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { useDispatch, useSelector } from "react-redux";
-import { setSpeakStatusAction } from "../../features/Timer/TimerControlSlice";
+import { setSpeakStatusAction } from "../../slices/TimerControlSlice";
 
 import { excerciseData } from "../../data/excersie";
 import { quotesData } from "../../data/quote";
-import { motivationalQuotesData } from "../../data/motivationalQuotes";
 
-import gif1 from "../../assets/gif1.gif";
-import gif2 from "../../assets/gif2.gif";
-import gif3 from "../../assets/gif3.gif";
-import gif4 from "../../assets/gif4.gif";
-import gif5 from "../../assets/gif5.gif";
-import gif6 from "../../assets/gif6.gif";
-import gif7 from "../../assets/gif7.gif";
-import gif8 from "../../assets/gif8.gif";
-import gif9 from "../../assets/gif9.gif";
 import Instruction from "./Instruction";
 import WorkModeModal from "./WorkModeModal";
 import RestModeModal from "./RestModeModal";
@@ -30,22 +20,17 @@ const GuideModal = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openGift, setOpenGift] = useState(false);
   const [motivationText, setMotivationText]: any = useState(false);
-  const [motivationalQuoteVal, setMotivationalQuote]: any = useState({});
-  const [newGif, setNewGif]: any = useState({});
   const dispatch = useDispatch();
   const speakStatus = useSelector(
     (state: any) => state.TimerControl.speakStatus
   );
   const TimerMode = useSelector((state: any) => state.TimerControl.timerMode);
 
-  const gifdata = [gif1, gif2, gif3, gif4, gif5, gif6, gif7, gif8, gif9];
-
   useEffect(() => {
     setExeValue(getRandomdata(excerciseData));
     setQuotes(getRandomdata(quotesData));
-    setMotivationalQuote(getRandomdata(motivationalQuotesData));
-    setNewGif(getRandomdata(gifdata));
-    console.log(motivationalQuoteVal);
+
+    console.log();
   }, []);
 
   function getRandomdata(data: any) {
@@ -89,7 +74,6 @@ const GuideModal = () => {
                   onClick={() => {
                     setOpenModal(false);
                     dispatch(setSpeakStatusAction(false));
-                    setMotivationText(false);
                   }}
                 />
               </div>
@@ -104,9 +88,7 @@ const GuideModal = () => {
               ) : (
                 <RestModeModal
                   motivationText={motivationText}
-                  motivationalQuoteVal={motivationalQuoteVal}
                   setMotivationText={setMotivationText}
-                  newGif={newGif}
                 />
               )}
             </div>

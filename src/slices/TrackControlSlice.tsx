@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import tracks from "../../data/track";
+import tracks from "../data/track";
 
 const initialState = {
   audioStatus: false,
