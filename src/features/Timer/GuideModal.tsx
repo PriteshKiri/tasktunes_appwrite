@@ -159,12 +159,10 @@ const GuideModal = () => {
                   </p>
                 </div>
               ) : (
-                <div className="flex flex-col items-center justify-start gap-y-8">
+                <div className="flex flex-col items-center justify-center gap-y-8 mt-16">
                   <div
-                    className={`text-[28px] flex items-center justify-center  ${
-                      motivationText
-                        ? " bounce-in-top opacity-100"
-                        : "opacity-0"
+                    className={`text-[28px]  items-center justify-center  ${
+                      motivationText ? " bounce-in-top flex" : "hidden"
                     }`}
                   >
                     <span className=" bg-clip-text font-mono text-transparent exercise-bg italic font-bold  text-center w-[90%] ">
@@ -200,7 +198,7 @@ drop-shadow-xl "
                     </p>
                   )}
                   {!motivationText && (
-                    <p>Tap on the but to get some motivation :)</p>
+                    <p className="text-center pb-8">Tap on the but to get some motivation :)</p>
                   )}
                 </div>
               )}

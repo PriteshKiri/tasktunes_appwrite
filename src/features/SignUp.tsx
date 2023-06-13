@@ -2,12 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { account, databases, Id } from "../appwrite/appwriteConfig";
 
 import { v4 as uuidv4 } from "uuid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TTlogo from "../assets/tasktunes_logo_animated.png";
 import { ToastContainer, toast } from "react-toastify";
 import { GrTwitter } from "react-icons/gr";
 import { BsGithub } from "react-icons/bs";
 import { ImLinkedin } from "react-icons/im";
+import { User } from "../app.models";
 const SignUp = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -16,6 +17,19 @@ const SignUp = () => {
     password: "",
   });
 
+  useEffect(() => {
+    const getData = account.get();
+    getData.then(
+      (res: User) => {
+        console.log(res);
+        navigate("/profile");
+      },
+      (err) => {
+        navigate("/");
+        console.log(err);
+      }
+    );
+  }, []);
   const signUpUser = async () => {
     const createAccount = account.create(
       Id.unique(),

@@ -1,17 +1,33 @@
 import { useNavigate } from "react-router-dom";
 import { account } from "../appwrite/appwriteConfig";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import TTlogo from "../assets/tasktunes_logo_animated.png";
 import { BsGithub } from "react-icons/bs";
 import { ImLinkedin } from "react-icons/im";
 import { GrTwitter } from "react-icons/gr";
+import { User } from "../app.models";
 const Login = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    const getData = account.get();
+    getData.then(
+      (res: User) => {
+        console.log(res);
+        navigate("/profile");
+
+      },
+      (err) => {
+        navigate("/");
+        console.log(err);
+      }
+    );
+  }, []);
 
   const LoginUser = async () => {
     const promise = account.createEmailSession(user.email, user.password);
