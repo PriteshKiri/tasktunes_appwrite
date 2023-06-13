@@ -93,7 +93,7 @@ const TimerContainer = () => {
     const now = Date.now();
     const then = now + seconds * 1000;
     displayTimeLeft(seconds);
-    customDisplayStatusMessage(then, seconds);
+    customDisplayStatusMessage(then);
     dispatch(setSpeakStatusAction(false));
     const newIntervalId = setInterval(() => {
       const secondsLeft = Math.round((then - Date.now()) / 1000);
@@ -131,7 +131,7 @@ const TimerContainer = () => {
     setCurrentTimer(displayTime);
   };
 
-  const customDisplayStatusMessage = (timestamp: any, time: any) => {
+  const customDisplayStatusMessage = (timestamp: any) => {
     const end = new Date(timestamp);
     const hour = end.getHours();
     const adjustedHour = hour > 12 ? hour - 12 : hour;
