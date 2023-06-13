@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { account, databases } from "../appwrite/appwriteConfig";
+import { account, databases, Id } from "../appwrite/appwriteConfig";
 
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
@@ -15,17 +15,19 @@ const SignUp = () => {
 
   const signUpUser = async () => {
     const createAccount = account.create(
-      uuidv4(),
+      Id.unique(),
       user.email,
       user.password,
       user.name
     );
 
+    console.log("datbase id", import.meta.env.VITE_DATABASE_ID);
+
     createAccount
       .then((resp) => {
         const createDoc = databases.createDocument(
-          "647729ede7a0545acbb7",
-          "64836eb4b4e4ec623236",
+          import.meta.env.VITE_DATABASE_ID,
+          import.meta.env.VITE_TASKS_COLLECTION_ID,
           uuidv4(),
           { todo: JSON.stringify([]), userID: resp?.$id }
         );
