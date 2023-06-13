@@ -2,12 +2,12 @@ import { Box, Button, Drawer, Zoom } from "@mui/material";
 import { useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
-import { databases } from "../appwrite/appwriteConfig";
+import { Id, databases } from "../appwrite/appwriteConfig";
 import { styled } from "@mui/material/styles";
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
+import { v4 as uuidv4 } from "uuid";
 
 import { RiTodoLine } from "react-icons/ri";
-import { v4 as uuidv4 } from "uuid";
 
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -24,7 +24,6 @@ import { ToastContainer, toast } from "react-toastify";
 
 const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
   const [state, setState]: any = useState("right");
-  // const [global, setGlobal]: any = useState([]);
   const [todo, setTodo]: any = useState([]);
   const [showInProgress, setShowInProgress]: any = useState([]);
   const [showComplted, setShowCompleted]: any = useState([]);
@@ -74,17 +73,18 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    const gettodos = databases.listDocuments(
-      "647729ede7a0545acbb7",
-      "64836eb4b4e4ec623236"
+    const getTodos = databases.listDocuments(
+      import.meta.env.VITE_DATABASE_ID,
+      import.meta.env.VITE_TASKS_COLLECTION_ID
     );
 
-    gettodos.then(
-      (res) => {
+    getTodos
+      .then((res) => {
         const userTodos = res.documents.filter((i) => {
           return i.userID === userDetails?.$id;
         });
         setDocId(userTodos[0].$id);
+        console.log(res, userDetails?.$id, userTodos[0].$id);
 
         if (userTodos?.length) {
           const dataArr = JSON.parse(userTodos[0]?.todo);
@@ -108,11 +108,13 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
               .map((item: any) => item.val)
           );
         }
-      },
-      (err) => {
+      })
+      .catch((err) => {
+        toast.error(err.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
         console.error(err);
-      }
-    );
+      });
   }, [saveAction]);
 
   const handleInputChange = (id: any, changedValue: string) => {
@@ -133,29 +135,36 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
       setDisableSave(true);
     }
 
-    const promise = databases.updateDocument(
-      "647729ede7a0545acbb7",
-      "64836eb4b4e4ec623236",
+    const updateDoc = databases.updateDocument(
+      "648837703f3833061544",
+      "648837a7e5234c5d17e5",
       docId,
       { todo: JSON.stringify(todo), userID: userDetails?.$id }
     );
 
-    promise.then(
-      (res) => {
+    updateDoc
+      .then((res) => {
         setSaveAction(!saveAction);
 
         toast.success("Successfuly saved your changes!", {
           position: toast.POSITION.TOP_CENTER,
         });
-      },
-      (err) => {
+      })
+      .catch((err) => {
+        toast.error(err.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
         console.error(err);
-      }
-    );
+      });
   };
 
   const addTodo = () => {
-    setTodo([...todo, { id: uuidv4(), val: "Add your task", status: "todo" }]);
+    setDisableSave(false);
+
+    setTodo([
+      ...todo,
+      { id: uuidv4(), val: "Add your task", status: "todo" },
+    ]);
   };
 
   const deleteTodo = (id: any) => {

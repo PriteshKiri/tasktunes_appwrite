@@ -1,42 +1,53 @@
 import { useEffect, useState } from "react";
 import { FaRegUser, FaUser } from "react-icons/fa";
 import { MdOutlineModeEditOutline } from "react-icons/md";
-import { account, databases, storage } from "../appwrite/appwriteConfig";
+import { Id, account, databases, storage } from "../appwrite/appwriteConfig";
 import { v4 as uuidv4 } from "uuid";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const UserProfile = ({ name, email, userId }: any) => {
   const [image, setImage]: any = useState();
   const [imgId, setImgID]: any = useState("");
-  const [uploadMessage, setUploadMessage]: any = useState(false);
 
   //Upload the image to appwrite
 
   useEffect(() => {
     const files = databases.listDocuments(
-      "647729ede7a0545acbb7",
-      "64862c21131914cb132e"
+      import.meta.env.VITE_DATABASE_ID,
+      import.meta.env.VITE_PROFILE_IMG_COLLECTION_ID
     );
 
-    files.then((res) => {
-      const fileDocs = res.documents.filter((i) => i?.userID === userId);
-      setImgID(fileDocs[fileDocs.length - 1]?.fileID);
-    });
+    files
+      .then((res) => {
+        const fileDocs = res.documents.filter((i) => i?.userID === userId);
+        setImgID(fileDocs[fileDocs.length - 1]?.fileID);
+        console.log(fileDocs[fileDocs.length - 1]?.fileID);
+      })
+      .catch((err) => {
+        toast.error(err.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        console.error(err);
+      });
   }, []);
 
   const uploadImage = async (e: any) => {
     e.preventDefault();
-    setUploadMessage(false);
-    const promise = storage.createFile("6485dc6f68787cf86dfb", uuidv4(), image);
+
+    const promise = storage.createFile(
+      import.meta.env.VITE_STORAGE_BUCKET_ID,
+      Id.unique(),
+      image
+    );
 
     promise.then(
       function (response) {
         setImgID(response.$id);
 
         const promise = databases.createDocument(
-          "647729ede7a0545acbb7",
-          "64862c21131914cb132e",
-          uuidv4(),
+          import.meta.env.VITE_DATABASE_ID,
+          import.meta.env.VITE_PROFILE_IMG_COLLECTION_ID,
+          Id.unique(),
           { fileID: response.$id, userID: userId }
         );
 
@@ -88,12 +99,12 @@ const UserProfile = ({ name, email, userId }: any) => {
         pauseOnHover
         theme="dark"
       />
-      <div className="flex flex-col items-center justify-center gap-y-4 p-4 ">
+      <div className="flex flex-col items-center justify-center gap-y-4 p-4 z-[100px]">
         <div className="  rounded-full  relative w-[200px] h-[100px] flex items-center justify-center">
           {imgId ? (
             <img
               src={storage
-                .getFilePreview("6485dc6f68787cf86dfb", imgId)
+                .getFilePreview(import.meta.env.VITE_STORAGE_BUCKET_ID, imgId)
                 .toString()}
               alt="Card image cap"
               className="rounded-full border-[2px] border-black/40 w-[100px] h-[100px]"

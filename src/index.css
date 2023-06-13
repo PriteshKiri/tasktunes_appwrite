@@ -33,3 +33,7 @@ body {
 .bdr-all {
   border: 1px solid #313131 !important;
 }
+
+.MuiTooltip-popperArrow {
+  z-index: 100 !important;
+}
