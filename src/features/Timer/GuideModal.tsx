@@ -76,7 +76,7 @@ const GuideModal = () => {
             <>
               {" "}
               <div className="flex justify-between">
-                <div>🎧 CodeNChill Guide</div>{" "}
+                <div>🎧 TaskTunes</div>{" "}
                 <MdClose
                   className="cursor-pointer"
                   onClick={() => setOpenModal(false)}

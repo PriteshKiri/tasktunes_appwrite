@@ -68,7 +68,7 @@ const Header = ({ userDetails }: { userDetails: User | null }) => {
           }
         >
           <div
-            className={` h-[40px] w-[40px] p-1 flex justify-center items-center text-white bg-black opacity-60 hover:opacity-80 rounded-md cursor-pointer ${
+            className={`hidden sm:flex h-[40px] w-[40px] p-1  justify-center items-center text-white bg-black opacity-60 hover:opacity-80 rounded-md cursor-pointer ${
               tooltipIsOpen ? "opacity-80" : ""
             }`}
             onClick={() => setTooltipIsOpen(!tooltipIsOpen)}
@@ -78,7 +78,7 @@ const Header = ({ userDetails }: { userDetails: User | null }) => {
         </HtmlTooltip>
 
         <div
-          className="logout text-white bg-black flex gap-x-3 items-center p-2 h-[40px] opacity-60 hover:opacity-80 rounded-md cursor-pointer"
+          className="logout text-white bg-black flex gap-x-3 items-center p-[27px] sm:p-2 h-[40px] opacity-60 hover:opacity-80 rounded-md cursor-pointer"
           onClick={() => logout()}
         >
           <TbLogout className="text-[20px]" />

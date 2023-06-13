@@ -256,7 +256,7 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
   }));
 
   return (
-    <div className=" w-[60px] h-[235px] p-2 flex flex-col justify-start bg-black rounded-tl-md rounded-bl-md gap-y-8">
+    <div className="hidden sm:flex w-[60px] h-[235px] p-2  flex-col justify-start bg-black rounded-tl-md rounded-bl-md gap-y-8">
       <>
         <Button
           className="!p-0 !flex !justify-center !-ml-[10px] !mt-3"

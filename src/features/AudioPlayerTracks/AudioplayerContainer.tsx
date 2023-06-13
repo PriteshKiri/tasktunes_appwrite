@@ -26,7 +26,7 @@ const AudioplayerContainer = () => {
   };
 
   return (
-    <div className=" w-full sm:w-1/2 h-[50%]  sm:h-[100%] border-t-2 border-light-50 sm:border-transparent pt-6 sm:pt-0 flex flex-col justify-around ">
+    <div className=" w-full sm:w-1/2 h-[50%]  sm:h-[100%] border-t-2 border-light-50 sm:border-transparent pt-2 sm:pt-6 sm:pt-0 flex flex-col justify-around ">
       <div className="shuffel w-full flex justify-center ">
         <div
           className="border bg-white rounded-full py-2 px-8 hover:opacity-100 sm:hover:opacity-60 cursor-pointer"

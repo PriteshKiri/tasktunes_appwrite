@@ -21,7 +21,7 @@ const TimerContainer = () => {
   const [currentTimer, setCurrentTimer] = useState("00:00");
   const [displayMessage, setDisplayMessage] = useState("⏰ Set your timer");
   const [intervalId, setIntervalId]: any = useState(0);
-  // const [mode, setMode] = useState("");
+
   const [disabled, setDisabled] = useState(true);
   const TimerMode = useSelector((state: any) => state.TimerControl.timerMode);
 
@@ -153,20 +153,20 @@ const TimerContainer = () => {
       <GuideModal />
 
       {/* Timer display section */}
-      <div className="h-[30%] mt-12 flex flex-col justify-center items-center">
+      <div className="h-[30%] mt-3 sm:mt-12 flex flex-col justify-center items-center">
         <div
           className={`w-[190px] h-[80px] bg-white flex  justify-center border-[5px] border-white items-center rounded-full ${
             currentTimer === "00:00" ? "" : "timer_dial"
           }`}
         >
-          <div className="text-[30px] font-bold ">{currentTimer}</div>
+          <div className="text-[28px] sm:text-[30px] font-bold ">{currentTimer}</div>
         </div>
-        <p className="display__end-time text-white text-xl sm:text-2xl font-extrabold mt-8">
+        <p className="opacity-0 sm:opacity-100 display__end-time text-white text-xl sm:text-2xl font-extrabold mt-8">
           {displayMessage}
         </p>
       </div>
       {/* Timer setup section */}
-      <div className="h-[57%] flex flex-col items-center justify-center gap-y-8">
+      <div className="h-[57%] flex flex-col items-center justify-center gap-y-4 sm:gap-y-8">
         <div className="timer__controls flex flex-wrap justify-center items-center px-8">
           <button
             className="bg-white px-6 py-2 w-[50%] text-center rounded-tl-3xl border-b-2 border-r-2  border-slate-500 drop-shadow-2xl hover:opacity-80 focus:opacity-70"
@@ -234,7 +234,7 @@ const TimerContainer = () => {
         >
           <input
             className="p-2 pl-4 rounded-l-3xl"
-            min={0}
+            min={1}
             name="minutes"
             placeholder="Enter Minutes"
             ref={inputRef}
