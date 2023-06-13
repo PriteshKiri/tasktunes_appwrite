@@ -33,7 +33,7 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
   const [disableSave, setDisableSave]: any = useState(true);
   const [lastTKeyPressTime, setLastTKeyPressTime] = useState(0);
 
-  const toggleDrawer = (anchor: string, open: boolean) => (e: any) => {
+  const toggleDrawer = (anchor: string, open: boolean) => () => {
     dispatch(setTaskDrawerStatusAction(open));
     if (!open && !disableSave) {
       toast.error("Please click on 'Save' button to save your changes!", {
@@ -48,7 +48,7 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
 
   useEffect(() => {
     function handleDoubleTap() {
-      toggleDrawer("right", true)({});
+      toggleDrawer("right", true)();
     }
 
     function handleKeyDown(event: any) {
