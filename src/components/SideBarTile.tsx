@@ -20,6 +20,7 @@ import { BiTask } from "react-icons/bi";
 import { User } from "../app.models";
 import { useDispatch } from "react-redux";
 import { setTaskDrawerStatusAction } from "../util/UtilSlice";
+import { ToastContainer, toast } from "react-toastify";
 
 const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
   const [state, setState]: any = useState("right");
@@ -35,21 +36,19 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
 
   const toggleDrawer = (anchor: string, open: boolean) => (event: any) => {
     dispatch(setTaskDrawerStatusAction(open));
-    console.log("in toggle drawer function", open);
-    if (
-      event.type === "keydown" &&
-      ((event as React.KeyboardEvent).key === "Tab" ||
-        (event as React.KeyboardEvent).key === "Shift")
-    ) {
-      return;
+    if (!open && !disableSave) {
+      toast.error("Please click on 'Save' button to save your changes!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
 
-    setState({ ...state, [anchor]: open });
+    if (disableSave) {
+      setState({ ...state, [anchor]: open });
+    }
   };
 
   useEffect(() => {
     function handleDoubleTap() {
-      console.log("working");
       toggleDrawer("right", true)({});
     }
 
@@ -82,12 +81,10 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
 
     gettodos.then(
       (res) => {
-        console.log("res", res);
         const userTodos = res.documents.filter((i) => {
           return i.userID === userDetails?.$id;
         });
         setDocId(userTodos[0].$id);
-        console.log("userTodos", userTodos);
 
         if (userTodos?.length) {
           const dataArr = JSON.parse(userTodos[0]?.todo);
@@ -113,7 +110,7 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
         }
       },
       (err) => {
-        console.log(err);
+        console.error(err);
       }
     );
   }, [saveAction]);
@@ -132,7 +129,9 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
   };
 
   const handleSave = () => {
-    console.log(todo);
+    if (!disableSave) {
+      setDisableSave(true);
+    }
 
     const promise = databases.updateDocument(
       "647729ede7a0545acbb7",
@@ -144,10 +143,13 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
     promise.then(
       (res) => {
         setSaveAction(!saveAction);
-        // window.location.reload();
+
+        toast.success("Successfuly saved your changes!", {
+          position: toast.POSITION.TOP_CENTER,
+        });
       },
       (err) => {
-        console.log(err);
+        console.error(err);
       }
     );
   };
@@ -157,6 +159,8 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
   };
 
   const deleteTodo = (id: any) => {
+    setDisableSave(false);
+
     const filterTodo = todo.filter((i: any) => i.id !== id);
     setTodo(filterTodo);
   };
@@ -170,8 +174,6 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
       updatedTodo.push(newItem);
       return updatedTodo;
     });
-
-    // setTodo(...todo, item);
   };
 
   const list = (anchor: string) => (
@@ -179,16 +181,18 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
       <Box role="presentation">
         <div className="flex flex-col w-full">
           <div className="flex justify-between items-center w-full p-2 bdr-b">
-            <p>
-              <RxCross1
-                className="text-white ml-2 cursor-pointer"
-                onClick={toggleDrawer(anchor, false)}
-              />{" "}
+            <p
+              className="flex- items-center justify-center p-2 rounded-md cursor-pointer bg-[#1a1a1b] cursor-pointer hover:bg-[#292929]"
+              onClick={toggleDrawer(anchor, false)}
+            >
+              <RxCross1 className="text-white" />{" "}
             </p>
             <button
               disabled={disableSave}
-              className={`bg-blue-500/80 py-1 px-6 mr-1 text-white rounded-md hover:bg-blue-500 ${
-                disableSave ? "bg-blue-500/30 hover:bg-blue-500/30" : ""
+              className={` py-1 px-6 mr-1 text-white rounded-md  ${
+                disableSave
+                  ? "bg-blue-500/30 hover:bg-blue-500/30"
+                  : "bg-blue-500/80 hover:bg-blue-500"
               } `}
               onClick={() => handleSave()}
             >
@@ -196,6 +200,9 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
             </button>
           </div>
 
+          <div>
+            <ToastContainer />
+          </div>
           <div className="w-full flex justify-around h-[93vh] pt-4">
             {/* todo */}
             <TodoContainer
@@ -207,13 +214,18 @@ const SideBarTile = ({ userDetails }: { userDetails: User | null }) => {
             />
 
             {/* In progress */}
-            <InProgress todo={todo} addItemToContainer={addItemToContainer} />
+            <InProgress
+              todo={todo}
+              addItemToContainer={addItemToContainer}
+              deleteTodo={deleteTodo}
+            />
 
             {/* Completed */}
 
             <CompletedContainer
               todo={todo}
               addItemToContainer={addItemToContainer}
+              deleteTodo={deleteTodo}
             />
           </div>
         </div>

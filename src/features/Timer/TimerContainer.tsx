@@ -62,7 +62,7 @@ const TimerContainer = () => {
     document.title = `  ${
       currentTimer != "00:00"
         ? `${currentTimer} - Timer`
-        : "ReacPlay - codeNchill"
+        : "TaskTunes | One stop to your Productivity"
     }`;
   }, [currentTimer]);
 
