@@ -66,7 +66,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="bg-black h-[100vh] flex flex-col items-center">
+    <div className="bg-black sm:h-[100vh] flex flex-col items-center">
       <ToastContainer
         position="top-center"
         autoClose={5000}
@@ -79,7 +79,7 @@ const SignUp = () => {
         pauseOnHover
         theme="dark"
       />
-      <div className="w-full h-full flex flex-row justify-around items-center bg-black gap-y-8 mt-4">
+      <div className="w-full h-full flex flex-col sm:flex-row justify-around items-center bg-black gap-y-8 mt-4">
         <div>
           <div className="logo mt-6 text-white">
             <div className="wrap">
@@ -97,9 +97,9 @@ const SignUp = () => {
           </div>
           <div></div>
         </div>
-        <div className="p-[50px] bg-gradient-to-r  from-[#15283d] via-black to-[#0d2f2c] rounded-3xl">
-          <div className="relative rounded-3xl sm:max-w-xl sm:mx-auto bg-black w-full h-full text-black w-[500px] height-[500px]">
-            <div className="relative px-4 py-10 pt-[35px] shadow-lg sm:rounded-3xl sm:p-10 sm:pb-20 text-white bg-black/60 bdr-all">
+        <div className=" p-8 sm:p-[50px] sm:bg-gradient-to-r  from-[#15283d] via-black to-[#0d2f2c] rounded-3xl">
+          <div className="relative rounded-3xl sm:max-w-xl sm:mx-auto bg-black w-full h-full text-black sm:w-[500px] sm:height-[500px]">
+            <div className="relative px-6 sm:px-4 py-24 sm:py-10 pt-[35px] shadow-lg rounded-3xl sm:p-10 sm:pb-20 text-white bg-black/60 bdr-all">
               <div className="max-w-md mx-auto">
                 <div>
                   <h1 className="text-2xl font-semibold  text-left ">
@@ -179,7 +179,7 @@ const SignUp = () => {
         </div>
       </div>
 
-      <footer className="text-white flex justify-between items-center w-[80%]  px-4 sm:px-6 sm:pb-4 bdr-t pt-6">
+      <footer className="text-white flex flex-col sm:flex-row justify-between items-center w-[80%]  px-4 sm:px-6 pb-6 sm:pb-4 bdr-t pt-6 bg-black gap-y-6 sm:gap-y-0">
         <p className="text-sm text-gray-600 mr-4 text-center">
           © 2023 Tasktunes.{" "}
           <small className="text-sm">
