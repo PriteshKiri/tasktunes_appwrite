@@ -1,8 +1,4 @@
-import { useNavigate } from "react-router-dom";
-import GoogleLoginButton from "../GoogleLoginButton";
-
-const LoginCard = ({ setUser, user, LoginUser }: any) => {
-  const navigate = useNavigate();
+const ForgetPasswordCard = ({ setUser, user, resetUser }: any) => {
   return (
     <div className=" p-8 sm:p-[50px] sm:bg-gradient-to-r  from-[#15283d] via-black to-[#0d2f2c] rounded-3xl">
       <div className="relative rounded-3xl sm:max-w-xl sm:mx-auto bg-black w-full h-full text-black sm:w-[500px] sm:height-[500px]">
@@ -10,25 +6,11 @@ const LoginCard = ({ setUser, user, LoginUser }: any) => {
           <div className="max-w-md mx-auto">
             <div>
               <h1 className="text-2xl font-semibold  text-left ">
-                Let's jump in to the{" "}
-                <span className="text-blue-400">Focus</span> mode!
+                Reset your <span className="text-blue-400">Password</span>
               </h1>
             </div>
             <div className="divide-y divide-gray-200">
               <div className="py-8 pt-2 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                <div className="relative">
-                  <input
-                    autoComplete="off"
-                    id="email"
-                    name="email"
-                    type="text"
-                    className=" w-full !bg-gray-700 !text-white !outline-0  border border-gray-300 text-gray-900 text-sm rounded-[8px] focus:!ring-blue-500 focus:!border-blue-500 block  p-[10px] border-gray-600 !placeholder:gray-400 !placeholder:[14px] mt-[25px]"
-                    placeholder="Email address"
-                    onChange={(e) => {
-                      setUser({ ...user, email: e.target.value });
-                    }}
-                  />
-                </div>
                 <div className="relative">
                   <input
                     autoComplete="off"
@@ -42,30 +24,28 @@ const LoginCard = ({ setUser, user, LoginUser }: any) => {
                     }}
                   />
                 </div>
-                <div className="relative flex gap-x-4">
+
+                <div className="relative">
+                  <input
+                    autoComplete="off"
+                    id="password"
+                    name="password"
+                    type="password"
+                    className=" w-full !bg-gray-700 !text-white !outline-0  border border-gray-300 text-gray-900 text-sm rounded-[8px] focus:!ring-blue-500 focus:!border-blue-500 block  p-[10px] border-gray-600 !placeholder:gray-400 !placeholder:[14px] mt-[25px]"
+                    placeholder="Password"
+                    onChange={(e) => {
+                      setUser({ ...user, passwordCheck: e.target.value });
+                    }}
+                  />
+                </div>
+                <div className="relative">
                   <button
                     className="bg-blue-500 hover:bg-blue-500/60 cursor-pointer text-white rounded-md px-4 py-2 text-sm mt-4"
-                    onClick={LoginUser}
+                    onClick={resetUser}
                   >
-                    Login
+                    Reset Password
                   </button>
-
-                  <GoogleLoginButton />
                 </div>
-              </div>
-              <div className="relative">
-                <p className="absolute top-5 ">
-                  Not a TaskTunes user?{" "}
-                  <span
-                    onClick={() => {
-                      navigate("/signup");
-                    }}
-                    className="underline font-bold mt-2 hover:text-blue-500 cursor-pointer"
-                  >
-                    Sign Up
-                  </span>{" "}
-                  now!
-                </p>
               </div>
             </div>
           </div>
@@ -75,4 +55,4 @@ const LoginCard = ({ setUser, user, LoginUser }: any) => {
   );
 };
 
-export default LoginCard;
+export default ForgetPasswordCard;

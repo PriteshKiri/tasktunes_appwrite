@@ -29,7 +29,7 @@ const Dashboard = () => {
         setUserDetails(res);
       },
       (err) => {
-        navigate("/login");
+        navigate("/signin");
         console.log(err);
       }
     );

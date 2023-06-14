@@ -24,8 +24,6 @@ const TimerContainer = () => {
   const [disabled, setDisabled] = useState(true);
   const TimerMode = useSelector((state: any) => state.TimerControl.timerMode);
 
-  // console.log("timerrrrr mode", TimerMode);
-
   const handleDisable = () => {
     if (inputRef.current) {
       if (inputRef.current.value) {
@@ -112,14 +110,10 @@ const TimerContainer = () => {
   };
 
   const handleResetTimer = () => {
+    dispatch(setTimerModeAction("rest"));
     clearInterval(intervalId);
     setCurrentTimer("00:00");
     setDisplayMessage("⏰ Set your timer");
-    if (TimerMode === "work") {
-      dispatch(setTimerModeAction("work"));
-    } else {
-      dispatch(setTimerModeAction("rest"));
-    }
   };
 
   const displayTimeLeft = (seconds: any) => {

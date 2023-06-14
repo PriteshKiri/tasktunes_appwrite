@@ -14,7 +14,7 @@ const Header = ({ userDetails }: { userDetails: User | null }) => {
   const logout = async () => {
     try {
       await account.deleteSession("current");
-      navigate("/login");
+      navigate("/signin");
     } catch (err) {
       console.log(err);
     }
