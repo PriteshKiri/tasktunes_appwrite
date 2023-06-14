@@ -80,10 +80,12 @@ const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
 
     getTodos
       .then((res) => {
-        console.log(res);
+        console.log("get all docs", res);
         const userTodos = res.documents.filter((i) => {
           return i?.userID === userDetails?.$id;
         });
+
+        console.log("user todos", userTodos);
         setDocId(userTodos[0]?.$id);
         console.log(res, userDetails?.$id, userTodos[0]?.$id);
 
