@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import GoogleLoginButton from "../GoogleLoginButton";
 
 const LoginCard = ({ setUser, user, LoginUser }: any) => {
   const navigate = useNavigate();
@@ -41,13 +42,15 @@ const LoginCard = ({ setUser, user, LoginUser }: any) => {
                     }}
                   />
                 </div>
-                <div className="relative">
+                <div className="relative flex gap-x-4">
                   <button
                     className="bg-blue-500 hover:bg-blue-500/60 cursor-pointer text-white rounded-md px-4 py-2 text-sm mt-4"
                     onClick={LoginUser}
                   >
-                    Submit
+                    Login
                   </button>
+
+                  <GoogleLoginButton />
                 </div>
               </div>
               <div className="relative">
