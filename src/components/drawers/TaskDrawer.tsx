@@ -86,10 +86,12 @@ const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
         });
 
         console.log("user todos", userTodos);
-        setDocId(userTodos[0]?.$id);
+
         console.log(res, userDetails?.$id, userTodos[0]?.$id);
 
         if (userTodos?.length) {
+          setDocId(userTodos[0]?.$id);
+
           const dataArr = JSON.parse(userTodos[0]?.todo);
 
           setTodo(dataArr);
@@ -110,6 +112,19 @@ const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
               .filter((item: any) => item.status === "completed")
               .map((item: any) => item.val)
           );
+        } else {
+          const createDoc = databases.createDocument(
+            import.meta.env.VITE_DATABASE_ID,
+            import.meta.env.VITE_TASKS_COLLECTION_ID,
+            uuidv4(),
+            { todo: JSON.stringify([]), userID: userDetails?.$id }
+          );
+
+          createDoc
+            .then((res) => {
+              setDocId(res?.documentId);
+            })
+            .catch((err) => console.error(err));
         }
       })
       .catch((err) => {
