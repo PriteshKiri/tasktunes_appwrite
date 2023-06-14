@@ -66,7 +66,7 @@ const GuideModal = () => {
             <Instruction />
           </Box>
         ) : (
-          <Box className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[90vw] h-[65vh] sm:h-[70vh] overflow-y-auto sm:w-[35vw] sm:h-[70vh] bg-white/95 shadow-2xl p-4 rounded-lg">
+          <Box className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[330px] h-[530px] sm:h-[70vh] overflow-y-auto sm:w-[35vw] bg-white/95 shadow-2xl p-4 rounded-lg">
             <div className="flex flex-col items-center justify-start w-full h-full gap-y-6 relative">
               <div className=" w-full flex justify-end">
                 <MdClose

@@ -110,10 +110,16 @@ const TimerContainer = () => {
   };
 
   const handleResetTimer = () => {
-    dispatch(setTimerModeAction("rest"));
     clearInterval(intervalId);
     setCurrentTimer("00:00");
     setDisplayMessage("⏰ Set your timer");
+    if (TimerMode === "work") {
+      dispatch(setTimerModeAction("work"));
+    }
+
+    if (TimerMode === "rest") {
+      dispatch(setTimerModeAction("rest"));
+    }
   };
 
   const displayTimeLeft = (seconds: any) => {
@@ -209,7 +215,7 @@ const TimerContainer = () => {
             {currentTimer}
           </div>
         </div>
-        <p className="opacity-0 sm:opacity-100 display__end-time text-white text-xl sm:text-2xl font-extrabold mt-8">
+        <p className="opacity-0 text-center sm:opacity-100 display__end-time text-white text-xl sm:text-2xl font-extrabold mt-8">
           {displayMessage}
         </p>
       </div>

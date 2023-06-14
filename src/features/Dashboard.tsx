@@ -48,7 +48,7 @@ const Dashboard = () => {
             <div className="w-full h-[10%] flex items-center justify-center p-4">
               <Header userDetails={userDetails} />
             </div>
-            <div className=" bg-black  opacity-60 shadow-xl py-8 sm:py-4 px-1 sm:px-4  mb-4 sm:mb-0  flex  flex-col-reverse sm:flex-row justify-center items-center gap-6 z-50 w-[90vw]  sm:w-[70vw] h-[75%]  sm:h-[65%]  rounded-lg  ">
+            <div className=" bg-black  opacity-60 shadow-xl py-8 sm:py-4 px-1 sm:px-4  mb-4 sm:mb-0  flex  flex-col-reverse sm:flex-row justify-center items-center gap-6 z-50 w-[350px]  sm:w-[70vw] h-[630px]  sm:h-[65%]  rounded-lg  ">
               <AudioplayerContainer />
               <TimerContainer />
               <div className="fixed right-0 top-40">
