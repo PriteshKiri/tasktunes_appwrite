@@ -72,6 +72,13 @@ const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
   }, [lastTKeyPressTime]);
 
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     window.location.reload();
+  //     console.log("reload");
+  //   }, 2000);
+  // }, []);
   useEffect(() => {
     const getTodos = databases.listDocuments(
       import.meta.env.VITE_DATABASE_ID,
@@ -123,6 +130,7 @@ const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
           createDoc
             .then((res) => {
               setDocId(res?.documentId);
+              window.location.reload();
             })
             .catch((err) => console.error(err));
         }

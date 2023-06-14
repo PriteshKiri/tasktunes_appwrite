@@ -13,9 +13,10 @@ const Instruction = () => {
       <br />
       <br />
       <span>
-        Here, you can easily <strong>play, pause , and shuffle</strong> your
-        Lo-Fi tracks, and adjust the<strong> volume</strong> or{" "}
-        <strong>mute </strong>the audio with just one click.
+        With the help of Lo-Fi music player you can easily{" "}
+        <strong>play, pause , and shuffle</strong> your Lo-Fi tracks, and adjust
+        the<strong> volume</strong> or <strong>mute </strong>the audio with just
+        one click.
       </span>
       <br />
       <br />
@@ -37,36 +38,24 @@ const Instruction = () => {
       <br />
       <br />
       <span>
-        The key <strong>highlight</strong> of this tool is that it will notify
-        you with a <strong>voice alert</strong> 📢 once the timer is over,
-        reminding you to "rest" 🥤 or "get back to work" 💻 based on your timer
-        mode.
+        This way to setup the mode. Second is if you want to add cutomer timer
+        and mode. Tha also you can do it here.
       </span>
-      <br />
-      <br />
       <span>
-        Our focus is on enhancing user <strong>accessibility</strong>, thus we
-        have provided several keyboard shortcut keys for your convenience.:
+        This timer featre works on the dopamine reward system. Meaning, if you
+        are in rest mode and your timer is over. It will show you a modal with a
+        intutive motivational quote that will show once you click the animation.
+        The other part is the reward part. Once you have completed your task, or
+        you can say the work mode is over, it will open a modal with a gift.
+        This Gift containes a excersie you can perform to get relaxed.
       </span>
-      <br />
-      <br />
       <span>
-        <li>
-          ➜ Press <strong>'s'</strong> to shuffel the tracks
-        </li>
-        <li>
-          ➜ Press <strong>'Spacebar'</strong> to play/pause
-        </li>
-        <li>
-          ➜ Press <strong>'Next arrow key'</strong> for next track
-        </li>
-        <li>
-          ➜ Press <strong>'Back arroy key'</strong> for previouse track
-        </li>
-        <li>
-          ➜ Press <strong>'m'</strong> to mute/unmute
-        </li>
+        Apart from this, we have a TaskManger that will help you manage your
+        task. If you want to see your tasks without opeing the drawer, just
+        hover over those three small icons with numbers on it.
       </span>
+      <br />
+      <br />
       <br />
       <span>
         We have made every effort to ensure the reliability of this tool,
@@ -77,9 +66,10 @@ const Instruction = () => {
       <br />
       <br />
       <span>
-        Thanks for reading this guide till the end. Let's{" "}
-        <strong>code and chill</strong> now 😉
+        There is a shortcut to open the drawer. If you double tap on "t" key, it
+        will open up the drawer.
       </span>
+      <span>Thanks for reading this guide till the end :)</span>
       <br />
       <br />
       <span>Happy hustling! 💪</span>
