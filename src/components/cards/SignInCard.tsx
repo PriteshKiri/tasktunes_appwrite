@@ -10,7 +10,7 @@ const SignInCard = ({ setUser, user, LoginUser }: any) => {
   const handleForgetPassword = async () => {
     const promise = account.createRecovery(
       user.email,
-      "http://localhost:5173/resetpassword"
+      "https://www.tasktunes.net/resetpassword"
     );
     promise.then(
       function () {
