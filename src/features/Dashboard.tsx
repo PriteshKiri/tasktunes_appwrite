@@ -26,6 +26,7 @@ const Dashboard = () => {
     const getData = account.get();
     getData.then(
       (res: User) => {
+        console.log(res);
         setUserDetails(res);
       },
       (err) => {

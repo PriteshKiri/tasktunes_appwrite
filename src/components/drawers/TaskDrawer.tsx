@@ -80,11 +80,12 @@ const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
 
     getTodos
       .then((res) => {
+        console.log(res);
         const userTodos = res.documents.filter((i) => {
-          return i.userID === userDetails?.$id;
+          return i?.userID === userDetails?.$id;
         });
-        setDocId(userTodos[0].$id);
-        console.log(res, userDetails?.$id, userTodos[0].$id);
+        setDocId(userTodos[0]?.$id);
+        console.log(res, userDetails?.$id, userTodos[0]?.$id);
 
         if (userTodos?.length) {
           const dataArr = JSON.parse(userTodos[0]?.todo);
