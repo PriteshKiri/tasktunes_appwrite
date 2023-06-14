@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { account, databases, Id } from "../appwrite/appwriteConfig";
+import { account } from "../appwrite/appwriteConfig";
 
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
