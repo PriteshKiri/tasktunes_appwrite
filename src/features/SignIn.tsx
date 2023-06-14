@@ -2,12 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { account } from "../appwrite/appwriteConfig";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-
-import { User } from "../app.models";
 import Footer from "../components/Footer";
-import LoginCard from "../components/cards/LoginCard";
+import LoginCard from "../components/cards/SignInCard";
 import LogoCard from "../components/cards/LogoCard";
-const Login = () => {
+const SignIn = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
@@ -17,13 +15,11 @@ const Login = () => {
   useEffect(() => {
     const getData = account.get();
     getData.then(
-      (res: User) => {
-        console.log(res);
+      () => {
         navigate("/");
       },
-      (err) => {
-        navigate("/login");
-        console.log(err);
+      () => {
+        navigate("/signin");
       }
     );
   }, []);
@@ -33,7 +29,13 @@ const Login = () => {
 
     promise
       .then(() => {
-        navigate("/");
+        toast.success("Sign in successful! Welcome to Tasktunes", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
       })
       .catch((err) => {
         console.log(err);
@@ -46,7 +48,7 @@ const Login = () => {
     <div className="bg-black sm:h-[100vh] flex flex-col items-center">
       <ToastContainer
         position="top-center"
-        autoClose={5000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -66,4 +68,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignIn;
