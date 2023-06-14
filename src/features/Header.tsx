@@ -12,8 +12,10 @@ const Header = ({ userDetails }: { userDetails: User | null }) => {
   const navigate = useNavigate();
   const [tooltipIsOpen, setTooltipIsOpen] = useState(false);
   const logout = async () => {
+    
     try {
       await account.deleteSession("current");
+      document.title = "TaskTunes | One stop to your Productivity";
       navigate("/signin");
     } catch (err) {
       console.log(err);
