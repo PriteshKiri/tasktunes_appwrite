@@ -52,7 +52,7 @@ const UserProfile = ({ name, email, userId }: any) => {
         );
 
         promise.then(
-          function (response) {
+          function () {
             toast.success("Profile picture uploaded successfully!", {
               position: toast.POSITION.TOP_CENTER,
             });
