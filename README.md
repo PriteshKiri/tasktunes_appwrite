@@ -10,7 +10,8 @@
 
 </br>
 
-[**Tasktunes**](https://tasktunes.net ) is a productivity application designed around the concept of the dopamine reward system.
+[**Tasktunes**](https://tasktunes.net ) is a productivity application designed around the concept of the dopamine reward system and is built with [**Appwrite**](https://appwrite.io/) 
+
 
 Its purpose is to assist users in achieving their goals and maintaining focus on their work.
 
