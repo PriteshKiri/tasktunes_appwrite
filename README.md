@@ -16,8 +16,8 @@ Its purpose is to assist users in achieving their goals and maintaining focus on
 
 The application features a built-in music player to create an ideal work environment, as well as a task manager that seamlessly syncs across all devices along with a Pomodoro timer to help you keep track of your time. 
 
-</br></br>
-# Features
+</br>
+# 🌟 Features
 
 The following are the **Key Highlights** of the application:
 </br>
@@ -26,25 +26,18 @@ The following are the **Key Highlights** of the application:
 
 TaskTunes has a Lo-Fi music player feature that provides a selection of great Lo-Fi songs. Users can control the music through the audio player panel, allowing them to play, pause, skip, adjust volume, and mute. The intuitive song container enables playing or pausing songs from the list, and a shuffle option is available. This feature aims to help users maintain focus, aligning with TaskTunes' primary goal.
 
-</br>
 
 ### 2. Pomodoro Timer: Helps you keep track of your time with a reward mechanism
 Task Tunes includes a Pomodoro timer feature that helps users manage their time effectively. It offers three default timer buttons: a 5-minute rest timer, a 15-minute quick work timer, and a 25-minute focused work timer. Unlike traditional Pomodoro techniques, Task Tunes replaces the 15-minute long break with a 15-minute quick work option. Clicking the rest button activates the rest mode, while the other buttons initiate work mode. Users can also add a custom timer and select either "rest" or "work" mode, which determines the type of reward prompt displayed. The feature leverages the dopamine reward system to boost productivity and motivation.
 
-</br>
 
 ### 3. Task Manager: Helps you seamlessly manage your tasks
 
 Task Tunes includes a remarkable task manager as its third key feature. Users can easily add tasks and organize them by dragging and dropping into "Todos," "In Progress," or "Completed" containers. Deleting tasks is also simple, and the text input allows unlimited text without restrictions. The task manager features a convenient side navigation bar that shows pending task numbers, and hovering over icons provides task previews without opening the drawer. Additionally, a keyboard shortcut (double-tap "t") instantly opens the task manager for quick accessibility and efficient usage.
 
 </br>
-</br>
 
-
-</br>
-</br>
-
-## Tech Stack
+## 💻 Tech Stack
 - React Vite: Fast and lightweight development environment
 
 - TypeScript: Enabling type safety in the app
@@ -60,7 +53,6 @@ Task Tunes includes a remarkable task manager as its third key feature. Users ca
   - Storage API: Handles storage of user profile images
 
 </br>
-</br>
 
 
 # 🔥 Demo 
@@ -72,15 +64,14 @@ Follow this video demo tutorial to understand how to use TaskTunes:
 
 
 </br>
-</br>
 
-## Fork and Clone the Repository 
+## 📥 Fork and Clone the Repository 
 
 First, you need to fork the Code Snippet Builder repo. You can do this by clicking the Fork button on the top right corner of the repo.
 
-</br>
 
-## Install the Dependencies 
+
+## 📦 Install the Dependencies 
 
 Install the dependencies by running the following command in the TaskTunes respository
 
@@ -90,9 +81,9 @@ Install the dependencies by running the following command in the TaskTunes respo
 npm install
 ```
 
-</br>
 
-## Start the Dev mode
+
+## 🚀 Start the Dev mode
 
 Use the following command to start the app in the development mode:
 
