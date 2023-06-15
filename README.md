@@ -24,17 +24,22 @@ The following are the **Key Highlights** of the application:
 
 ### 1. Lo-Fi Music Player: Help you to stay in focus mode
 
+TaskTunes has a Lo-Fi music player feature that provides a selection of great Lo-Fi songs. Users can control the music through the audio player panel, allowing them to play, pause, skip, adjust volume, and mute. The intuitive song container enables playing or pausing songs from the list, and a shuffle option is available. This feature aims to help users maintain focus, aligning with TaskTunes' primary goal.
+
 </br>
 
-### 2. Pomodoro Timer: Helps you keep track of your time with a reward mechanism.
+### 2. Pomodoro Timer: Helps you keep track of your time with a reward mechanism
+Task Tunes includes a Pomodoro timer feature that helps users manage their time effectively. It offers three default timer buttons: a 5-minute rest timer, a 15-minute quick work timer, and a 25-minute focused work timer. Unlike traditional Pomodoro techniques, Task Tunes replaces the 15-minute long break with a 15-minute quick work option. Clicking the rest button activates the rest mode, while the other buttons initiate work mode. Users can also add a custom timer and select either "rest" or "work" mode, which determines the type of reward prompt displayed. The feature leverages the dopamine reward system to boost productivity and motivation.
 
 </br>
 
 ### 3. Task Manager: Helps you seamlessly manage your tasks
 
+Task Tunes includes a remarkable task manager as its third key feature. Users can easily add tasks and organize them by dragging and dropping into "Todos," "In Progress," or "Completed" containers. Deleting tasks is also simple, and the text input allows unlimited text without restrictions. The task manager features a convenient side navigation bar that shows pending task numbers, and hovering over icons provides task previews without opening the drawer. Additionally, a keyboard shortcut (double-tap "t") instantly opens the task manager for quick accessibility and efficient usage.
+
 </br>
 </br>
-Read more about the journey of development and features in this blog : [TaskTunes: One-stop to your productivity!!](https://www.showwcase.com/show/35219/showwcasexs-seamless-showwcase-experience-on-every-website)
+
 
 </br>
 </br>
@@ -60,27 +65,24 @@ Read more about the journey of development and features in this blog : [TaskTune
 
 # 🔥 Demo 
 
-Follow this video demo tutorial to understand how to use ShowwcaseXS:
+Follow this video demo tutorial to understand how to use TaskTunes:
 </br>
 
-[![tasktunes tutorial](https://img.youtube.com/vi/qpBV-JB9WPg/0.jpg)](https://www.youtube.com/watch?v=qpBV-JB9WPg)
+[![tasktunes tutorial](https://img.youtube.com/vi/v5EEOqUyFS8/0.jpg)](https://www.youtube.com/watch?v=v5EEOqUyFS8)
 
 
 </br>
 </br>
 
-# Installation
-</br>
-
-#### Step - 1
+## Fork and Clone the Repository 
 
 First, you need to fork the Code Snippet Builder repo. You can do this by clicking the Fork button on the top right corner of the repo.
 
 </br>
 
-#### Step - 2
+## Install the Dependencies 
 
-install the dependencies by running the following command in the TaskTunes respository
+Install the dependencies by running the following command in the TaskTunes respository
 
 
 
@@ -90,7 +92,7 @@ npm install
 
 </br>
 
-#### Step - 3
+## Start the Dev mode
 
 Use the following command to start the app in the development mode:
 
