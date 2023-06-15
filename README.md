@@ -17,6 +17,7 @@ Its purpose is to assist users in achieving their goals and maintaining focus on
 The application features a built-in music player to create an ideal work environment, as well as a task manager that seamlessly syncs across all devices along with a Pomodoro timer to help you keep track of your time. 
 
 </br>
+
 # 🌟 Features
 
 The following are the **Key Highlights** of the application:
