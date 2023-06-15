@@ -19,7 +19,6 @@ const RestModeModal = ({ motivationText, setMotivationText }: any) => {
   useEffect(() => {
     setMotivationalQuote(getRandomdata(motivationalQuotesData));
     setNewGif(getRandomdata(gifdata));
-    console.log();
   }, [motivationText]);
 
   return (
@@ -39,7 +38,7 @@ const RestModeModal = ({ motivationText, setMotivationText }: any) => {
           onClick={() => setMotivationText(true)}
         >
           <span className="animate-ping absolute inline-flex w-[120px] h-[120px] rounded-full bg-sky-400 opacity-75"></span>
-      
+
           <span
             className="click-btn-shadow font-mono text-sm relative text-center flex items-center justify-center rounded-full p-5 w-[120px] h-[120px] bg-sky-500 font-bold text-white/80 
 drop-shadow-xl "

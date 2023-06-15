@@ -23,8 +23,6 @@ const ForgetPassword = () => {
 
     setRecoveryDetails({ userId, secret });
 
-    console.log(userId); // Print the value of userId
-    console.log(secret); // Print the value of secret
   }, []);
 
   const resetUser = async () => {

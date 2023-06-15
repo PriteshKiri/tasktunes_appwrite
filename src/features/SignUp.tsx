@@ -4,7 +4,6 @@ import { account, databases, Id } from "../appwrite/appwriteConfig";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { User } from "../app.models";
 import Footer from "../components/Footer";
 import SignUpCard from "../components/cards/SignUpCard";
 import LogoCard from "../components/cards/LogoCard";
@@ -19,12 +18,11 @@ const SignUp = () => {
   useEffect(() => {
     const getData = account.get();
     getData.then(
-      (res: User) => {
-        console.log(res);
+      () => {
         navigate("/");
       },
       (err) => {
-        console.log(err);
+        console.error(err);
         navigate("/signup");
       }
     );
@@ -36,8 +34,6 @@ const SignUp = () => {
       user.password,
       user.name
     );
-
-    console.log("datbase id", import.meta.env.VITE_DATABASE_ID);
 
     createAccount
       .then((resp) => {
@@ -65,7 +61,7 @@ const SignUp = () => {
               });
           })
           .catch((err) => {
-            console.log(err);
+            console.error(err);
             toast.error(err.message, {
               position: toast.POSITION.TOP_CENTER,
             });

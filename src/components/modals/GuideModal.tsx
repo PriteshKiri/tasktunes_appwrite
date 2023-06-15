@@ -29,8 +29,6 @@ const GuideModal = () => {
   useEffect(() => {
     setExeValue(getRandomdata(excerciseData));
     setQuotes(getRandomdata(quotesData));
-
-    console.log();
   }, []);
 
   function getRandomdata(data: any) {
@@ -57,7 +55,7 @@ const GuideModal = () => {
           <Box className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[90vw] h-[80vh] overflow-y-auto sm:w-[50vw] sm:h-[70vh] bg-white/95 shadow-2xl p-4 rounded-lg">
             {" "}
             <div className="flex justify-between">
-              <div>🎧 TaskTunes</div>{" "}
+              <h2 className="text-[20px] font-bold pb-4">🎧 TaskTunes</h2>{" "}
               <MdClose
                 className="cursor-pointer"
                 onClick={() => setOpenModal(false)}

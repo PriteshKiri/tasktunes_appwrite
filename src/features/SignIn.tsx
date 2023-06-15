@@ -38,7 +38,7 @@ const SignIn = () => {
         }, 2000);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         toast.error(err.message, {
           position: toast.POSITION.TOP_CENTER,
         });

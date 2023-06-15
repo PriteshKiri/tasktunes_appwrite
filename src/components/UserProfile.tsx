@@ -20,7 +20,6 @@ const UserProfile = ({ name, email, userId }: any) => {
       .then((res) => {
         const fileDocs = res.documents.filter((i) => i?.userID === userId);
         setImgID(fileDocs[fileDocs.length - 1]?.fileID);
-        console.log(fileDocs[fileDocs.length - 1]?.fileID);
       })
       .catch((err) => {
         toast.error(err.message, {
@@ -54,7 +53,6 @@ const UserProfile = ({ name, email, userId }: any) => {
 
         promise.then(
           function (response) {
-            console.log(response); // Success
             toast.success("Profile picture uploaded successfully!", {
               position: toast.POSITION.TOP_CENTER,
             });
@@ -63,7 +61,7 @@ const UserProfile = ({ name, email, userId }: any) => {
             toast.error(error.message, {
               position: toast.POSITION.TOP_CENTER,
             });
-            console.log(error); // Failure
+            console.error(error); // Failure
           }
         );
       },
@@ -71,7 +69,7 @@ const UserProfile = ({ name, email, userId }: any) => {
         toast.error(error.message, {
           position: toast.POSITION.TOP_CENTER,
         });
-        console.log(error); // Failure
+        console.error(error); // Failure
       }
     );
   };

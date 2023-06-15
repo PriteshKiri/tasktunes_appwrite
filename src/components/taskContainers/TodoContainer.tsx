@@ -17,7 +17,6 @@ const TodoContainer = ({
     }),
   }));
 
-  console.log(todo?.filter((item: any) => item.status === "todo"));
   return (
     <div
       ref={drop}

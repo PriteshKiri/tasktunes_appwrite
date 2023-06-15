@@ -73,12 +73,6 @@ const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     window.location.reload();
-  //     console.log("reload");
-  //   }, 2000);
-  // }, []);
   useEffect(() => {
     const getTodos = databases.listDocuments(
       import.meta.env.VITE_DATABASE_ID,
@@ -87,14 +81,9 @@ const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
 
     getTodos
       .then((res) => {
-        console.log("get all docs", res);
         const userTodos = res.documents.filter((i) => {
           return i?.userID === userDetails?.$id;
         });
-
-        console.log("user todos", userTodos);
-
-        console.log(res, userDetails?.$id, userTodos[0]?.$id);
 
         if (userTodos?.length) {
           setDocId(userTodos[0]?.$id);
