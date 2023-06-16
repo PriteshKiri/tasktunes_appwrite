@@ -85,6 +85,7 @@ const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
           return i?.userID === userDetails?.$id;
         });
 
+        console.log(userTodos);
         if (userTodos?.length) {
           setDocId(userTodos[0]?.$id);
 
@@ -119,7 +120,9 @@ const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
           createDoc
             .then((res) => {
               setDocId(res?.documentId);
-              window.location.reload();
+              // setTimeout(() => {
+              //   window.location.reload();
+              // }, 2000);
             })
             .catch((err) => console.error(err));
         }
