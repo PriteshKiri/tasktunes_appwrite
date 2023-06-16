@@ -21,6 +21,7 @@ import { User } from "../../app.models";
 import { useDispatch } from "react-redux";
 import { setTaskDrawerStatusAction } from "../../util/UtilSlice";
 import { ToastContainer, toast } from "react-toastify";
+import { Query } from "appwrite";
 
 const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
   const [state, setState]: any = useState("right");
@@ -76,7 +77,8 @@ const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
   useEffect(() => {
     const getTodos = databases.listDocuments(
       import.meta.env.VITE_DATABASE_ID,
-      import.meta.env.VITE_TASKS_COLLECTION_ID
+      import.meta.env.VITE_TASKS_COLLECTION_ID,
+      [Query.limit(100)]
     );
 
     getTodos
@@ -85,7 +87,6 @@ const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
           return i?.userID === userDetails?.$id;
         });
 
-        console.log(userTodos);
         if (userTodos?.length) {
           setDocId(userTodos[0]?.$id);
 
