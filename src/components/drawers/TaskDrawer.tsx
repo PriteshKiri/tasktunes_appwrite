@@ -2,7 +2,6 @@ import { Box, Button, Drawer, Zoom } from "@mui/material";
 import { useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
-import { databases } from "../../appwrite/appwriteConfig";
 import { styled } from "@mui/material/styles";
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 import { v4 as uuidv4 } from "uuid";
@@ -17,22 +16,47 @@ import InProgress from "../taskContainers/InProgress";
 import CompletedContainer from "../taskContainers/CompletedContainer";
 import { MdPendingActions } from "react-icons/md";
 import { BiTask } from "react-icons/bi";
-import { User } from "../../app.models";
 import { useDispatch } from "react-redux";
 import { setTaskDrawerStatusAction } from "../../util/UtilSlice";
 import { ToastContainer, toast } from "react-toastify";
-import { Query } from "appwrite";
 
-const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
+const TASKS_STORAGE_KEY = "tasktunes.todo";
+
+type TodoItem = {
+  id: string;
+  val: string;
+  status: "todo" | "inprogress" | "completed";
+};
+
+const loadTodosFromStorage = (): TodoItem[] => {
+  try {
+    const raw = localStorage.getItem(TASKS_STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (err) {
+    console.error("Failed to read tasks from localStorage:", err);
+    return [];
+  }
+};
+
+const TaskDrawer = () => {
   const [state, setState]: any = useState("right");
-  const [todo, setTodo]: any = useState([]);
-  const [showInProgress, setShowInProgress]: any = useState([]);
-  const [showComplted, setShowCompleted]: any = useState([]);
-  const [showTodo, setShowTodo]: any = useState([]);
-  const [saveAction, setSaveAction]: any = useState(false);
-  const [docId, setDocId]: any = useState("");
-  const [disableSave, setDisableSave]: any = useState(true);
+  const [todo, setTodo] = useState<TodoItem[]>(() => loadTodosFromStorage());
+  const [disableSave, setDisableSave] = useState(true);
   const [lastTKeyPressTime, setLastTKeyPressTime] = useState(0);
+
+  const dispatch = useDispatch();
+
+  const showTodo = todo
+    .filter((item) => item.status === "todo")
+    .map((item) => item.val);
+  const showInProgress = todo
+    .filter((item) => item.status === "inprogress")
+    .map((item) => item.val);
+  const showComplted = todo
+    .filter((item) => item.status === "completed")
+    .map((item) => item.val);
 
   const toggleDrawer = (anchor: string, open: boolean) => () => {
     dispatch(setTaskDrawerStatusAction(open));
@@ -59,7 +83,6 @@ const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
         setLastTKeyPressTime(currentTime);
 
         if (elapsedTime < 300) {
-          // Adjust the time interval (in milliseconds) as per your preference
           handleDoubleTap();
         }
       }
@@ -72,131 +95,47 @@ const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
     };
   }, [lastTKeyPressTime]);
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const getTodos = databases.listDocuments(
-      import.meta.env.VITE_DATABASE_ID,
-      import.meta.env.VITE_TASKS_COLLECTION_ID,
-      [Query.limit(100)]
+  const handleInputChange = (id: string, changedValue: string) => {
+    setDisableSave(false);
+    setTodo((prevTodo) =>
+      prevTodo.map((item) =>
+        item.id === id ? { ...item, val: changedValue } : item
+      )
     );
-
-    getTodos
-      .then((res) => {
-        const userTodos = res.documents.filter((i) => {
-          return i?.userID === userDetails?.$id;
-        });
-
-        if (userTodos?.length) {
-          setDocId(userTodos[0]?.$id);
-
-          const dataArr = JSON.parse(userTodos[0]?.todo);
-
-          setTodo(dataArr);
-
-          setShowTodo(
-            dataArr
-              .filter((item: any) => item.status === "todo")
-              .map((item: any) => item.val)
-          );
-
-          setShowInProgress(
-            dataArr
-              .filter((item: any) => item.status === "inprogress")
-              .map((item: any) => item.val)
-          );
-          setShowCompleted(
-            dataArr
-              .filter((item: any) => item.status === "completed")
-              .map((item: any) => item.val)
-          );
-        } else {
-          const createDoc = databases.createDocument(
-            import.meta.env.VITE_DATABASE_ID,
-            import.meta.env.VITE_TASKS_COLLECTION_ID,
-            uuidv4(),
-            { todo: JSON.stringify([]), userID: userDetails?.$id }
-          );
-
-          createDoc
-            .then((res) => {
-              setDocId(res?.documentId);
-              // setTimeout(() => {
-              //   window.location.reload();
-              // }, 2000);
-            })
-            .catch((err) => console.error(err));
-        }
-      })
-      .catch((err) => {
-        toast.error(err.message, {
-          position: toast.POSITION.TOP_CENTER,
-        });
-        console.error(err);
-      });
-  }, [saveAction]);
-
-  const handleInputChange = (id: any, changedValue: string) => {
-    setTodo((prevTodo: any) => {
-      const updatedTodo = prevTodo.map((item: any) => {
-        if (item.id === id) {
-          return { ...item, val: changedValue };
-        }
-        return item;
-      });
-
-      return updatedTodo;
-    });
   };
 
   const handleSave = () => {
-    if (!disableSave) {
+    try {
+      localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(todo));
       setDisableSave(true);
-    }
-
-    const updateDoc = databases.updateDocument(
-      "648837703f3833061544",
-      "648837a7e5234c5d17e5",
-      docId,
-      { todo: JSON.stringify(todo), userID: userDetails?.$id }
-    );
-
-    updateDoc
-      .then(() => {
-        setSaveAction(!saveAction);
-
-        toast.success("Successfuly saved your changes!", {
-          position: toast.POSITION.TOP_CENTER,
-        });
-      })
-      .catch((err) => {
-        toast.error(err.message, {
-          position: toast.POSITION.TOP_CENTER,
-        });
-        console.error(err);
+      toast.success("Successfuly saved your changes!", {
+        position: toast.POSITION.TOP_CENTER,
       });
+    } catch (err: any) {
+      toast.error(err?.message || "Failed to save tasks", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      console.error(err);
+    }
   };
 
   const addTodo = () => {
     setDisableSave(false);
-
     setTodo([...todo, { id: uuidv4(), val: "Add your task", status: "todo" }]);
   };
 
-  const deleteTodo = (id: any) => {
+  const deleteTodo = (id: string) => {
     setDisableSave(false);
-
-    const filterTodo = todo.filter((i: any) => i.id !== id);
-    setTodo(filterTodo);
+    setTodo((prev) => prev.filter((i) => i.id !== id));
   };
 
-  const addItemToContainer = (id: any, status: any) => {
+  const addItemToContainer = (id: string, status: TodoItem["status"]) => {
     setDisableSave(false);
-    setTodo((prevTodo: any) => {
-      const updatedTodo = prevTodo.filter((item: any) => item.id !== id);
-      const newItem = prevTodo.find((item: any) => item.id === id);
-      newItem.status = status;
-      updatedTodo.push(newItem);
+    setTodo((prevTodo) => {
+      const updatedTodo = prevTodo.filter((item) => item.id !== id);
+      const newItem = prevTodo.find((item) => item.id === id);
+      if (!newItem) return prevTodo;
+      updatedTodo.push({ ...newItem, status });
       return updatedTodo;
     });
   };
@@ -229,7 +168,6 @@ const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
             <ToastContainer />
           </div>
           <div className="w-full flex justify-around h-[93vh] pt-4">
-            {/* todo */}
             <TodoContainer
               addTodo={addTodo}
               handleInputChange={handleInputChange}
@@ -238,14 +176,11 @@ const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
               addItemToContainer={addItemToContainer}
             />
 
-            {/* In progress */}
             <InProgress
               todo={todo}
               addItemToContainer={addItemToContainer}
               deleteTodo={deleteTodo}
             />
-
-            {/* Completed */}
 
             <CompletedContainer
               todo={todo}
@@ -365,7 +300,6 @@ const TaskDrawer = ({ userDetails }: { userDetails: User | null }) => {
         <Drawer
           anchor="right"
           open={state["right"]}
-          // onClose={toggleDrawer("right", false)}
           PaperProps={{
             sx: {
               backgroundColor: "#040404db",

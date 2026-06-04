@@ -2,7 +2,7 @@ import TTlogo from "../../assets/tasktunes_logo_animated.png";
 
 const LogoCard = () => {
   return (
-    <div className="logo mt-6 text-white">
+    <div className="logo mt-6 text-white flex flex-col items-center justify-center text-center">
       <div className="wrap">
         <div className="eye down"></div>
         <div className="eye down"></div>

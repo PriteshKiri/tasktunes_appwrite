@@ -1,17 +1,15 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "./features/SignIn";
-import SignUp from "./features/SignUp";
-
 import Dashboard from "./features/Dashboard";
-import ForgetPassword from "./features/ForgetPassword";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Dashboard />} />{" "}
+      <Route path="/" element={<Login />} />
       <Route path="/signin" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />{" "}
-      <Route path="/resetpassword" element={<ForgetPassword />} />{" "}
+      <Route path="/login" element={<Login />} />
+      <Route path="/start" element={<Dashboard />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
